@@ -10,7 +10,7 @@ import mdft_parser.parserJson as pJ
 
 from mdft_writer.writers import *
 
-topgro_list = "topgro/"
+topgro_list = "minitopgro/"
 input_mdft = "input_mdft/"
 
 
@@ -41,7 +41,7 @@ for input_file in input_files:
     writeSoluteIn(input_mdft+input_name, energy.syst, energy.exp_dg, energy.calc_dg, \
                   atom_list.list_num, atom_list.list_charge, atom_list.list_sigma, atom_list.list_epsilon, atom_list.list_atomname, \
                   atom_listcoord.list_x, atom_listcoord.list_y, atom_listcoord.list_z, \
-                  atom_list.list_mass)
+                  atom_list.list_numatom)
     writeDftIn(input_mdft+input_name, sys.argv[1], sys.argv[2], sys.argv[3], 298.15)
     writeDoFile(input_mdft+input_name)
     

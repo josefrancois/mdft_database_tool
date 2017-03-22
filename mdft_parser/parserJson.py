@@ -10,7 +10,7 @@ class ParserJson:
     def nameSyst(self, name):
         self.syst = name
             
-    def getInfos(self, fjson):        
+    def parseEnergies(self, fjson):        
         with open(fjson, 'r') as json_file:            
             solute_db = json.load(json_file)
             self.iupac = solute_db[self.syst]["iupac"]
