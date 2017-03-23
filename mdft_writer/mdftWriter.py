@@ -1,7 +1,10 @@
-import dftInWriter
-import soluteInWriter
+from dftInWriter import *
+from soluteInWriter import *
 
 
-def writeMdftFiles(fold, parameters, molecule)
-	solutein = soluteInWriter(molecule)
-	dftin = dftInWriter(parameters)
+def writeMdftFiles(folder, molecule):
+	solutein = SoluteInWriter(molecule)
+	dftin = DftInWriter()
+	
+	solutein.write(folder)
+	dftin.write(folder)

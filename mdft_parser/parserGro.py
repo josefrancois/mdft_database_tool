@@ -11,6 +11,3 @@ class ParserGro:
                     self.list_x.append(float(line.split()[4])*10)
                     self.list_y.append(float(line.split()[5])*10)
                     self.list_z.append(float(line.split()[6])*10) 
-                    
-    def getNumberofAtoms(self):
-        return len(self.list_x)   
