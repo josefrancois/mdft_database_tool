@@ -29,10 +29,11 @@ for input_file in input_files:
         os.mkdir(input_mdft+input_name)
         print input_name
         
-    molecule = gP.parse(topgro_list+input_name + ".gro", topgro_list+input_name + ".top", json_file)
+    parser = gP.GromacsParser(topgro_list+input_name + ".gro", topgro_list+input_name + ".top", json_file)  
+    molecule = parser.parse()
     
-    
-    mW.writeMdftFiles(input_mdft+input_name, molecule)
+    writer = mW.MdftWriter(molecule)
+    writer.write(input_mdft+input_name)
 
 
 #writeDoFile(input_mdft+input_name)    
