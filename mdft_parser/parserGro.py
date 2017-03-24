@@ -1,8 +1,8 @@
 class ParserGro:  
-    def __init__(self):
-        self.list_x = []
-        self.list_y = []
-        self.list_z = []
+    def __init__(self, list_x = [], list_y = [], list_z = []):
+        self.list_x = list_x
+        self.list_y = list_y
+        self.list_z = list_z
         
     def parseCoord(self, fgro):        
         with open(fgro, 'r') as gro:  

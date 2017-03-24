@@ -6,22 +6,21 @@ from parserJson import *
 
 
 class GromacsParser:
-    def __init__(self, grofile = '', topfile = '', jsonfile = ''):
-        self.grofile = grofile
-        self.topfile = topfile
-        self.jsonfile = jsonfile
+    def __init__(self, gro_filename = '', top_filename = ''):
+        self.gro_filename = gro_filename
+        self.top_filename = top_filename
 
 
     def parse(self):
         gro = ParserGro()
         top = ParserTop()
-        fjson = ParserJson()
         
-        gro.parseCoord(self.grofile)
-        top.parseAtoms(self.topfile)
-        fjson.parseEnergies(self.jsonfile, self.grofile[self.grofile.find('/')+1:-4])
         
+        gro.parseCoord(self.gro_filename)
+        top.parseAtoms(self.top_filename)
         molecule = Molecule()
+        print molecule
+        
         for i in range(top.getNumberOfAtoms()):
             #print top.getListName()[i]
             atomtype = top.getListAtomtype()[i]
@@ -35,11 +34,8 @@ class GromacsParser:
                         top.getListNumatom()[i])
             #print atom.getName()
             molecule.addAtom(atom)
-
-        molecule.setExpDg(fjson.getCalcDg() )
-        molecule.setCalcDg(fjson.getExpDg() ) 
-        molecule.setName(fjson.getSystName() )
-        #print molecule.name
+            
+        #print molecule
               
         return molecule
         

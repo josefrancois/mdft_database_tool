@@ -1,9 +1,8 @@
 class Molecule():
-    def __init__(self, name = '', list_atoms = [],  exp_dg = '', calc_dg = ''):
+    def __init__(self, name = '', data = {}):
         self.name = name
-        self.list_atoms = list_atoms
-        self.exp_dg = exp_dg
-        self.calc_dg = calc_dg
+        self.list_atoms = []
+        self.data = {}
         
     def setName(self,name):
         self.name = name
@@ -11,11 +10,8 @@ class Molecule():
     def addAtom(self, atome):
         self.list_atoms.append(atome)
     
-    def setExpDg(self, exp_dg):
-        self.exp_dg = exp_dg
-        
-    def setCalcDg(self, calc_dg):
-        self.calc_dg = calc_dg
+    def setData(self, data):
+		self.data = data
         
     def getListAtoms(self):
         return self.list_atoms
@@ -23,11 +19,8 @@ class Molecule():
     def getName(self):
         return self.name
 
-    def getExpDg(self):
-        return self.exp_dg
-
-    def getCalcDg(self):
-        return self.calc_dg
+    def getData(self):
+		return self.data
 
     def getNumberOfAtoms(self):
         return len(self.list_atoms)
