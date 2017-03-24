@@ -7,7 +7,6 @@ class ParserTop:
 		self.list_num = []
 		self.list_sigma = {}
 		self.list_epsilon = {}
-		self.number_of_atoms = len(self.list_name)
         
 	def parseAtoms(self, ftop):                                                                
 		with open(ftop, 'r') as top:         
@@ -23,4 +22,25 @@ class ParserTop:
 					self.list_epsilon[line.split()[0]] = float(line.split()[6])* 4.187      
 					
 	def getNumberOfAtoms(self):
-		return self.number_of_atoms
+		return len(self.list_name)
+	
+	def getListName(self):
+		return self.list_name
+		
+	def getListAtomtype(self):
+		return self.list_atomtype
+		
+	def getListCharge(self):
+		return self.list_charge
+		
+	def getListNumatom(self):
+		return self.list_numatom
+		
+	def getListNum(self):
+		return self.list_num
+		
+	def getListSigma(self):
+		return self.list_sigma
+		
+	def getListEpsilon(self):
+		return self.list_epsilon

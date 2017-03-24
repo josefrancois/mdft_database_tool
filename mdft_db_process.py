@@ -31,6 +31,7 @@ for input_file in input_files:
         
     molecule = gP.parse(topgro_list+input_name + ".gro", topgro_list+input_name + ".top", json_file)
     
+    
     mW.writeMdftFiles(input_mdft+input_name, molecule)
 
 

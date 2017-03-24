@@ -1,5 +1,5 @@
-from atomMaker import *
-from moleculeMaker import *
+from atom import *
+from molecule import *
 from parserTop import *
 from parserGro import *
 from parserJson import *
@@ -14,21 +14,24 @@ def parse(grofile, topfile, jsonfile):
     fjson.parseEnergies(jsonfile, grofile[grofile.find('/')+1:-4])
     
     molecule = Molecule()
-    for i in range(top.number_of_atoms):
-        atom = Atom(top.list_name[i],\
-                    top.list_num[i],\
-                    top.list_atomtype[i],\
-                    {'x':gro.list_x[i], 'y':gro.list_y[i], 'z':gro.list_z[i]},\
-                    top.list_charge[i],\
-                    top.list_epsilon[list_atomtype[i]],\
-                    top.list_sigma[list_atomtype[i]],\
-                    top.list_numatom[i])
+    for i in range(top.getNumberOfAtoms()):
+        #print top.getListName()[i]
+        atomtype = top.getListAtomtype()[i]
+        atom = Atom(top.getListName()[i],\
+                    top.getListNum()[i],\
+                    top.getListAtomtype()[i],\
+                    {'x':gro.getListx()[i], 'y':gro.getListy()[i], 'z':gro.getListz()[i]},\
+                    top.getListCharge()[i],\
+                    top.getListEpsilon()[atomtype],\
+                    top.getListSigma()[atomtype],\
+                    top.getListNumatom()[i])
+        #print atom.getName()
         molecule.addAtom(atom)
 
-    molecule.setExpDg(fjson.getCalcDg)
-    molecule.setCalcDg(fjson.getExpDg) 
-    molecule.setName(fjson.getSystName)
-    print molecule.name
+    molecule.setExpDg(fjson.getCalcDg() )
+    molecule.setCalcDg(fjson.getExpDg() ) 
+    molecule.setName(fjson.getSystName() )
+    #print molecule.name
           
     return molecule
         

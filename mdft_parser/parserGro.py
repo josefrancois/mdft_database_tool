@@ -11,3 +11,12 @@ class ParserGro:
                     self.list_x.append(float(line.split()[4])*10)
                     self.list_y.append(float(line.split()[5])*10)
                     self.list_z.append(float(line.split()[6])*10) 
+                    
+    def getListx(self):
+        return self.list_x
+        
+    def getListy(self):
+        return self.list_y
+        
+    def getListz(self):
+        return self.list_z
