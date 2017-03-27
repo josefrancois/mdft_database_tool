@@ -19,7 +19,7 @@ class GromacsParser:
         gro.parseCoord(self.gro_filename)
         top.parseAtoms(self.top_filename)
         molecule = Molecule()
-        print molecule
+        #print molecule
         
         for i in range(top.getNumberOfAtoms()):
             #print top.getListName()[i]
