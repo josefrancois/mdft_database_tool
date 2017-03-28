@@ -2,14 +2,13 @@ import os
 
 
 class DftInWriter:
-    mmax = 1
-    temperature = 298.15
-
-    def __init__(self, l=32.0, n=64, solvent=None):
+    def __init__(self, l=32.0, n=64, mmax = 1, temp = 298.15, solvent=None):
         self.l = l
         self.n = n
+        self.mmax = mmax
+        self.temperature = temp
         self.solvent = solvent
-
+        
     def write(self, folder):
         with open(os.path.join(folder, "dft.in"), 'w') as dftin:
             dftin.write("boxnod = {0} {1} {2}".format(self.n,self.n,self.n) + '\n')
@@ -19,11 +18,8 @@ class DftInWriter:
             if (self.solvent is not None) :
                 dftin.write("solvent = " + str(self.solvent) + "\n")                          
 
-    
-
     def setMmax(self, mmax):
         self.mmax=mmax
-
 
     def setTemperature(self, temperature):
         self.temperature=temperature
@@ -39,14 +35,13 @@ class DftInWriter:
     def setSolvent(self, solvent):
         self.solvent = solvent
 
-    def getMmax():
+    def getMmax(self):
         return mmax
 
-
-    def getTemperature():
+    def getTemperature(self):
         return temperature
 
-    def getN(self, n):
+    def getN(self):
         return self.n
             
     def getL(self):
