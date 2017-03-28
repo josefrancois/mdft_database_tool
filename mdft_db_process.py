@@ -63,6 +63,9 @@ for input_file in input_files:
     writer = mW.MdftWriter(molecule, param_mdft)
     writer.write(input_mdft+input_name)
 
-
+    os.system("cp mdft_launch.do " + input_mdft+input_name)
+    
+    
+    
 #writeDoFile(input_mdft+input_name)    
 #os.system("tar -czvf ./input_mdft.tar.gz ./input_mdft/")
