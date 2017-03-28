@@ -8,15 +8,19 @@ import mdft_parser.parserJson as pJ
 import mdft_writer.mdftWriter as mW
 import argparse
 
+
+#os.system("git clone https://github.com/maxlevesque/mdft-dev")
+
+
 arg_parser = argparse.ArgumentParser(prog="mdft_db_process.py")
 
 arg_parser.add_argument("--json", help = "JSON file to parse")
 arg_parser.add_argument("--topgro", help = "Folder which contains top and gro files to parse")
-arg_parser.add_argument("--L", help = "Length of box size", type=float)
-arg_parser.add_argument("--N", help = "Number of nodes", type=int)
+arg_parser.add_argument("--boxlen", "-l", help = "Length of box size", type=float)
+arg_parser.add_argument("--boxnod", "-n", help = "Number of nodes", type=int)
 arg_parser.add_argument("--solvent", help = "Solvent to use in MDFT")
 arg_parser.add_argument("--mmax", help = "Maximum number of orientations of solvent molecules to consider")
-arg_parser.add_argument("--temperature", help = "Temperature to use in MDFT", type=float)
+arg_parser.add_argument("--temperature","-T", help = "Temperature to use in MDFT", type=float)
 mdft_args = arg_parser.parse_args()
 
 
@@ -39,7 +43,7 @@ else:
             json_file = actual_file
 #print json_file
 
-param_mdft = {'L':mdft_args.L, 'N':mdft_args.N, 'solvent':mdft_args.solvent, 'mmax':mdft_args.mmax, 'temperature':mdft_args.temperature}
+param_mdft = {'L':mdft_args.boxlen, 'N':mdft_args.boxnod, 'solvent':mdft_args.solvent, 'mmax':mdft_args.mmax, 'temperature':mdft_args.temperature}
 
 for input_file in input_files:    
     input_name = input_file[:-4]
@@ -49,23 +53,28 @@ for input_file in input_files:
         pass
     else:
         os.mkdir(input_mdft+input_name)
-        print input_name
+        os.system("ln -s /local/home/jfrancois/Documents/mdft_project_clean/mdft-dev/build/data " + input_mdft+input_name +"/data")
+        os.system("ln -s /local/home/jfrancois/Documents/mdft_project_clean/mdft-dev/build/mdft-dev " + input_mdft+input_name +"/mdft-dev")
+        print input_name       
+        parser = gP.GromacsParser(topgro_files+input_name + ".gro", topgro_files+input_name + ".top")
+        molecule = parser.parse()
+                                                    
+        fjson = pJ.ParserJson()
+        fjson.parseData(json_file, input_name)
+        molecule.setData(fjson.getDataSolute() )
+        molecule.setName(fjson.getSoluteName() )
+        #print molecule.getData
+                                                                              
+        writer = mW.MdftWriter(molecule, param_mdft)
+        writer.write(input_mdft+input_name)
+        os.chdir(input_mdft+input_name)
+        os.system("./mdft-dev | tee " + input_name +".log")
+        os.chdir("../..")
         
-    parser = gP.GromacsParser(topgro_files+input_name + ".gro", topgro_files+input_name + ".top")
-    molecule = parser.parse()
+        
     
-    fjson = pJ.ParserJson()
-    fjson.parseData(json_file, input_name)
-    molecule.setData(fjson.getDataSolute() )
-    molecule.setName(fjson.getSoluteName() )
-    #print molecule.getData
-        
-    writer = mW.MdftWriter(molecule, param_mdft)
-    writer.write(input_mdft+input_name)
 
-    os.system("cp mdft_launch.do " + input_mdft+input_name)
-    
-    
-    
-#writeDoFile(input_mdft+input_name)    
+
+
+
 #os.system("tar -czvf ./input_mdft.tar.gz ./input_mdft/")
