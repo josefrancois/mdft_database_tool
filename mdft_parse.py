@@ -17,13 +17,13 @@ for subfolder in os.listdir(folder_to_parse):
 			pJson.parseData(json_file, subfolder)
 			pLog.parse(path_to_logfile)
 			data_solute = pJson.getDataSolute()
-			data_solute['mdft_energy'] = float(pLog.getMdftEnergy())
-			data_solute['functional_at_min'] = float(pLog.getFunctionalAtMin())
-			data_solute['mdft_energy_pc'] = float(pLog.getMdftEnergyPc())
-			data_solute['mdft_energy_pc+'] = float(pLog.getMdftEnergyPcPlus())
-			data_solute['mdft_energy_pmv'] = float(pLog.getMdftEnergyPmv())
-			data_solute['mdft_energy_pid'] = float(pLog.getMdftEnergyPid())
-			print data_solute
+			data_solute['mdft_energy (kJ/mol)'] = float(pLog.getMdftEnergy())
+			data_solute['functional_at_min (kJ/mol)'] = float(pLog.getFunctionalAtMin())
+			data_solute['mdft_energy_pc (kJ/mol)'] = float(pLog.getMdftEnergyPc())
+			data_solute['mdft_energy_pc+ (kJ/mol)'] = float(pLog.getMdftEnergyPcPlus())
+			data_solute['mdft_energy_pmv (kJ/mol)'] = float(pLog.getMdftEnergyPmv())
+			data_solute['mdft_energy_pid (kJ/mol)'] = float(pLog.getMdftEnergyPid())
+			print subfolder
 			mdft_database[subfolder] = data_solute
 
 newJson = jW.JsonWriter(mdft_database)
