@@ -1,24 +1,55 @@
 import os
-import json
+import mdft_parser.parserJson as pJ
+import mdft_parser.parserLog as pL
+import mdft_writer.jsonWriter as jW
 
-dico_mdft = {}
-for elt in os.listdir("./mdft-log"):
-    solute = elt[elt.find("_")+1:]
-    with open(os.path.join("./mdft-log/output_"+solute, solute+".log"), 'r') as f:     
-        for l in f:
-            if l.find("ENERGY") != -1:
-                dico_mdft[solute] = float(l.split()[-1])
+json_file = "mobley.json"
+folder_to_parse = "./mini_input_mdft/"
+pJson = pJ.ParserJson()
+pLog = pL.ParserLog()
+
+mdft_database = {}
+
+for subfolder in os.listdir(folder_to_parse):
+	for mdft_file in os.listdir(folder_to_parse+subfolder):
+		if mdft_file[-4:] == ".log":
+			path_to_logfile = folder_to_parse+subfolder+'/'+mdft_file
+			pJson.parseData(json_file, subfolder)
+			pLog.parse(path_to_logfile)
+			data_solute = pJson.getDataSolute()
+			data_solute['mdft_energy'] = float(pLog.getMdftEnergy())
+			data_solute['functional_at_min'] = float(pLog.getFunctionalAtMin())
+			data_solute['mdft_energy_pc'] = float(pLog.getMdftEnergyPc())
+			data_solute['mdft_energy_pc+'] = float(pLog.getMdftEnergyPcPlus())
+			data_solute['mdft_energy_pmv'] = float(pLog.getMdftEnergyPmv())
+			data_solute['mdft_energy_pid'] = float(pLog.getMdftEnergyPid())
+			print data_solute
+			mdft_database[subfolder] = data_solute
+
+newJson = jW.JsonWriter(mdft_database)
+newJson.write('mdft.json')
 
 
 
-with open("mobley.json", 'r') as json_file:
-    mobley_db = json.load(json_file)
-    for elt in mobley_db.keys():
-        if mobley_db[elt]["iupac"] in dico_mdft.keys():
-            mobley_db[elt]["calc_mdft"] = dico_mdft[mobley_db[elt]["iupac"]]
-       
-with open("mobley_mdft.json", 'w') as mobley_mdft:
-    json.dump(mobley_db, mobley_mdft, indent = 4)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

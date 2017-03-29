@@ -13,15 +13,15 @@ class ParserLog:
 				if line.find("ENERGY") != -1:
 					self.mdft_energy = line.split()[-1]
 				elif line.find("Functional at min") != -1:
-					self.functional_at_min = line.split()[-1]
+					self.functional_at_min = line.split()[-2]
 				elif line.find("PC ") != -1:
-					self.mdft_energy_pc = line.split()[-1]
+					self.mdft_energy_pc = line.split()[-2]
 				elif line.find("PC+") != -1:
-					self.mdft_energy_pc_plus = line.split()[-1]
+					self.mdft_energy_pc_plus = line.split()[-2]
 				elif line.find("PMV") != -1:
-					self.mdft_energy_pmv = line.split()[-1]
+					self.mdft_energy_pmv = line.split()[-2]
 				elif line.find("Pid") != -1:
-					self.mdft_energy_pid = line.split()[-1]
+					self.mdft_energy_pid = line.split()[-2]
 					
 					
 	def getMdftEnergy(self):
