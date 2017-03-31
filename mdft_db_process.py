@@ -53,8 +53,8 @@ for input_file in input_files:
         pass
     else:
         os.mkdir(input_mdft+input_name)
-        os.system("ln -s /local/home/jfrancois/Documents/mdft_project_clean/mdft-dev/build/data " + input_mdft+input_name +"/data")
-        os.system("ln -s /local/home/jfrancois/Documents/mdft_project_clean/mdft-dev/build/mdft-dev " + input_mdft+input_name +"/mdft-dev")
+        os.system("ln -s "+ os.getcwd() + "/mdft-dev/build/data " + input_mdft+input_name +"/data")
+        os.system("ln -s " + os.getcwd() + "mdft-dev/build/mdft-dev " + input_mdft+input_name +"/mdft-dev")
         print input_name       
         parser = gP.GromacsParser(topgro_files+input_name + ".gro", topgro_files+input_name + ".top")
         molecule = parser.parse()
