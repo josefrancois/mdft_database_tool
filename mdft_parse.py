@@ -17,12 +17,12 @@ for subfolder in os.listdir(folder_to_parse):
 			pJson.parseData(json_file, subfolder)
 			pLog.parse(path_to_logfile)
 			data_solute = pJson.getDataSolute()
-			data_solute['mdft_energy (kJ/mol)'] = float(pLog.getMdftEnergy())
-			data_solute['functional_at_min (kJ/mol)'] = float(pLog.getFunctionalAtMin())
-			data_solute['mdft_energy_pc (kJ/mol)'] = float(pLog.getMdftEnergyPc())
-			data_solute['mdft_energy_pc+ (kJ/mol)'] = float(pLog.getMdftEnergyPcPlus())
-			data_solute['mdft_energy_pmv (kJ/mol)'] = float(pLog.getMdftEnergyPmv())
-			data_solute['mdft_energy_pid (kJ/mol)'] = float(pLog.getMdftEnergyPid())
+			data_solute['mdft_energy'] = float(pLog.getMdftEnergy())*0.239006
+			data_solute['functional_at_min'] = float(pLog.getFunctionalAtMin())*0.239006
+			data_solute['mdft_energy_pc'] = float(pLog.getMdftEnergyPc())*0.239006
+			data_solute['mdft_energy_pc+'] = float(pLog.getMdftEnergyPcPlus())*0.239006
+			data_solute['mdft_energy_pmv'] = float(pLog.getMdftEnergyPmv())*0.239006
+			data_solute['mdft_energy_pid'] = float(pLog.getMdftEnergyPid())*0.239006
 			print subfolder
 			mdft_database[subfolder] = data_solute
 
