@@ -14,8 +14,8 @@ import argparse
 
 arg_parser = argparse.ArgumentParser(prog="mdft_db_process.py")
 
-arg_parser.add_argument("--json", help = "JSON file to parse")
-arg_parser.add_argument("--topgro", help = "Folder which contains top and gro files to parse")
+arg_parser.add_argument("--json", help = "JSON file to parse", default = "mobley.json")
+arg_parser.add_argument("--topgro", help = "Folder which contains top and gro files to parse", default = "minitopgro")
 arg_parser.add_argument("--boxlen", "-l", help = "Length of box size", type=float)
 arg_parser.add_argument("--boxnod", "-n", help = "Number of nodes", type=int)
 arg_parser.add_argument("--solvent", help = "Solvent to use in MDFT")
@@ -23,11 +23,8 @@ arg_parser.add_argument("--mmax", help = "Maximum number of orientations of solv
 arg_parser.add_argument("--temperature","-T", help = "Temperature to use in MDFT", type=float)
 mdft_args = arg_parser.parse_args()
 
-
-if mdft_args.topgro is not None:
-    topgro_files = mdft_args.topgro+"/"
-else:
-    topgro_files = "minitopgro/"
+topgro_files = mdft_args.topgro+"/"
+json_file = mdft_args.json
 input_mdft = "input_mdft/"
 
 if os.path.exists(input_mdft) == False:
@@ -35,12 +32,7 @@ if os.path.exists(input_mdft) == False:
     
 input_files = os.listdir(topgro_files)
 
-if mdft_args.json is not None:
-    json_file = mdft_args.json
-else:
-    for actual_file in os.listdir('.'):
-        if actual_file[-5:] == ".json":
-            json_file = actual_file
+
 #print json_file
 
 param_mdft = {'L':mdft_args.boxlen, 'N':mdft_args.boxnod, 'solvent':mdft_args.solvent, 'mmax':mdft_args.mmax, 'temperature':mdft_args.temperature}

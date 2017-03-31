@@ -1,4 +1,4 @@
 *.pyc
 *~
 input_mdft
-minitopgro
+mdft.json
