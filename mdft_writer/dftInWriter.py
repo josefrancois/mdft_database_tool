@@ -2,12 +2,12 @@ import os
 
 
 class DftInWriter:
-    def __init__(self, l=32.0, n=64, mmax = 1, temp = 298.15, solvent=None):
-        self.l = l
-        self.n = n
-        self.mmax = mmax
-        self.temperature = temp
-        self.solvent = solvent
+    def __init__(self):
+        self.l = None
+        self.n = None
+        self.mmax = None
+        self.temperature = None
+        self.solvent = None
         
     def write(self, folder):
         with open(os.path.join(folder, "dft.in"), 'w') as dftin:

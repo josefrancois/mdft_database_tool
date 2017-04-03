@@ -12,15 +12,17 @@ import argparse
 #os.system("git clone https://github.com/maxlevesque/mdft-dev")
 
 
-arg_parser = argparse.ArgumentParser(prog="mdft_db_process.py")
+arg_parser = argparse.ArgumentParser(prog="mdft_db_process.py", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
 arg_parser.add_argument("--json", help = "JSON file to parse", default = "mobley.json")
 arg_parser.add_argument("--topgro", help = "Folder which contains top and gro files to parse", default = "minitopgro")
-arg_parser.add_argument("--boxlen", "-l", help = "Length of box size", type=float)
-arg_parser.add_argument("--boxnod", "-n", help = "Number of nodes", type=int)
+#arg_parser.add_argument("--boxlen", "-l", help = "Length of box size", type=float, default = 32)
+#arg_parser.add_argument("--boxnod", "-n", help = "Number of nodes", type=int, default = 64)
+arg_parser.add_argument("--voxelsize", "-dx", help = "Length of voxel side", type=float, default = 0.5)
+arg_parser.add_argument("--lenbulk", "-lb", help = "Distance between solute and box sides", type=int, default = 10)
 arg_parser.add_argument("--solvent", help = "Solvent to use in MDFT")
-arg_parser.add_argument("--mmax", help = "Maximum number of orientations of solvent molecules to consider")
-arg_parser.add_argument("--temperature","-T", help = "Temperature to use in MDFT", type=float)
+arg_parser.add_argument("--mmax", help = "Maximum number of orientations of solvent molecules to consider", type=int, default = 1)
+arg_parser.add_argument("--temperature","-T", help = "Temperature to use in MDFT", type=float, default = 298.15)
 mdft_args = arg_parser.parse_args()
 
 topgro_files = mdft_args.topgro+"/"
