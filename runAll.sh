@@ -18,3 +18,5 @@ for folder in *; do
 	    cd ..;
     fi
 done
+mv ../input_mdft ../output_mdft
+tar -czvf ../output_mdft.tar.gz ../output_mdft
