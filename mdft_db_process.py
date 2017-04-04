@@ -1,16 +1,8 @@
-#import sys
-
-#if len(sys.argv) != 4:
-#    sys.exit("NOTICE : python mdft_db_process.py boxlen boxnod mmax")
 import os
 import mdft_parser.gromacsParser as gP
 import mdft_parser.parserJson as pJ
 import mdft_writer.mdftWriter as mW
 import argparse
-
-
-#os.system("git clone https://github.com/maxlevesque/mdft-dev")
-
 
 arg_parser = argparse.ArgumentParser(prog="mdft_db_process.py", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
@@ -57,10 +49,11 @@ for input_file in input_files:
                                                                               
         writer = mW.MdftWriter(molecule, param_mdft)
         writer.write(input_mdft+input_name)
-        os.system("cp do "+ input_mdft+input_name)
+        os.system("cp pc.do "+ input_mdft+input_name)
         #os.chdir(input_mdft+input_name)
         #os.system("./mdft-dev | tee " + input_name +".log")
         #os.chdir("../..")
-        
+
+run_writer = mW.runAllWriter("serversParam.json")        
 os.system("cp runAll.sh " + input_mdft)        
 os.system("tar -czvf ./input_mdft.tar.gz ./input_mdft/")

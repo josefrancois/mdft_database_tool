@@ -13,10 +13,9 @@ for folder in *; do
 	if [ -d $folder -a $folder != "mdft-dev" ]; then
 	    cp mdft-dev/build/mdft-dev $folder
 	    cp -r mdft-dev/build/data $folder
-	    cd $folder;
-	    sbatch do;
-	    cd ..;
+	    cd $folder
+	    sbatch do
+	    cd ..
     fi
 done
-mv ../input_mdft ../output_mdft
-tar -czvf ../output_mdft.tar.gz ../output_mdft
+
