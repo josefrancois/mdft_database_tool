@@ -20,3 +20,6 @@ class ParserGro:
         
     def getListz(self):
         return self.list_z
+        
+    def getSoluteGreatestWidth(self):
+        return max(max(self.list_x)-min(self.list_x),max(self.list_y)-min(self.list_y),max(self.list_z)-min(self.list_z))
