@@ -26,6 +26,7 @@ rsync -av --update ${SLURM_SUBMIT_DIR}/ .
 # Execute the code
 #mpirun --bind-to none ${EXE} md.in > md.out
 
+export OMP_NUM_THREADS = 1
 ./mdft-dev
 
 # Store the exit status of the parallel job, whether it was successful or not
