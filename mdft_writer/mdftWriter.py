@@ -15,9 +15,14 @@ class MdftWriter:
         solutein.write(folder)
          
         if self.parameters['lb'] is not None:
-            dftin.setL(2* self.parameters['lb'] + self.molecule.getWidth())
+            dftin.setLx(2* self.parameters['lb'] + self.molecule.getMoleculeWidth()['x'])
+            dftin.setLy(2* self.parameters['lb'] + self.molecule.getMoleculeWidth()['y'])
+            dftin.setLz(2* self.parameters['lb'] + self.molecule.getMoleculeWidth()['z'])
         if self.parameters['dx'] is not None:
-            dftin.setN(int(dftin.getL()/self.parameters['dx']))        
+            dftin.setNx(int(dftin.getLx()/self.parameters['dx']))
+            dftin.setNy(int(dftin.getLy()/self.parameters['dx']))
+            dftin.setNz(int(dftin.getLz()/self.parameters['dx']))
+                    
         if self.parameters['solvent'] is not None:
             dftin.setSolvent(self.parameters['solvent'])
         if self.parameters['mmax'] is not None:

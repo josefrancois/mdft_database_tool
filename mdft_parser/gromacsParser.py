@@ -34,7 +34,6 @@ class GromacsParser:
                         top.getListNumatom()[i])
             #print atom.getName()
             molecule.addAtom(atom)
-            molecule.setWidth(gro.getSoluteGreatestWidth())
             
         #print molecule
               

@@ -3,16 +3,16 @@ import os
 
 class DftInWriter:
     def __init__(self):
-        self.l = None
-        self.n = None
+        self.l = {'x': None, 'y': None, 'z': None}
+        self.n = {'x': None, 'y': None, 'z': None}
         self.mmax = None
         self.temperature = None
         self.solvent = None
         
     def write(self, folder):
         with open(os.path.join(folder, "dft.in"), 'w') as dftin:
-            dftin.write("boxnod = {0} {1} {2}".format(self.n,self.n,self.n) + '\n')
-            dftin.write("boxlen = {0} {1} {2}".format(float(self.l),float(self.l),float(self.l)) + '\n')
+            dftin.write("boxnod = {0} {1} {2}".format(self.n['x'],self.n['x'],self.n['x']) + '\n')
+            dftin.write("boxlen = {0} {1} {2}".format(float(self.l['x']),float(self.l['y']),float(self.l['z'])) + '\n')
             dftin.write("mmax = " + str(self.mmax) + "\n")
             dftin.write("temperature = " + str(self.temperature) + "\n")                          
             if (self.solvent is not None) :
@@ -23,14 +23,30 @@ class DftInWriter:
 
     def setTemperature(self, temperature):
         self.temperature=temperature
-
-    def setN(self, n):
-        if(n>0):
-            self.n = n
         
-    def setL(self, l):
-        if(l>0.0):
-            self.l = l
+    def setNx(self, nx):
+        if(nx>0.0):
+            self.n['x'] = nx
+            
+    def setNy(self, ny):
+        if(ny>0.0):
+            self.n['y'] = ny
+            
+    def setNz(self, nz):
+        if(nz>0.0):
+            self.n['z'] = nz
+            
+    def setLx(self, lx):
+        if(lx>0.0):
+            self.l['x'] = lx
+            
+    def setLy(self, ly):
+        if(ly>0.0):
+            self.l['y'] = ly
+            
+    def setLz(self, lz):
+        if(lz>0.0):
+            self.l['z'] = lz
         
     def setSolvent(self, solvent):
         self.solvent = solvent
@@ -40,12 +56,24 @@ class DftInWriter:
 
     def getTemperature(self):
         return temperature
-
-    def getN(self):
-        return self.n
+               
+    def getNx(self):
+        return self.l['x']
+        
+    def getNy(self):
+        return self.l['y']
+        
+    def getNz(self):
+        return self.l['z']
             
-    def getL(self):
-        return self.l
+    def getLx(self):
+        return self.l['x']
+        
+    def getLy(self):
+        return self.l['y']
+        
+    def getLz(self):
+        return self.l['z']
             
     def getSolvent(self):
         return self.solvent

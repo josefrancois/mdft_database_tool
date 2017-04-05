@@ -14,9 +14,6 @@ class Molecule():
     def setData(self, data):
         self.data = data
         
-    def setWidth(self, width):
-        self.width = width
-        
     def getListAtoms(self):
         return self.list_atoms
 
@@ -25,13 +22,22 @@ class Molecule():
 
     def getData(self):
         return self.data
-    
-    def getWidth(self):
-        return self.width
 
     def getNumberOfAtoms(self):
         return len(self.list_atoms)
-    
+        
+    def getMoleculeWidth(self):
+        list_coord = {'x':[], 'y':[], 'z':[]}
+        for i in xrange(len(self.list_atoms)):
+            list_coord['x'].append(self.list_atoms[i].coord['x'])
+            list_coord['y'].append(self.list_atoms[i].coord['y'])
+            list_coord['z'].append(self.list_atoms[i].coord['z'])
+        x_width = max(list_coord['x'])-min(list_coord['x'])
+        y_width = max(list_coord['y'])-min(list_coord['y'])
+        z_width = max(list_coord['z'])-min(list_coord['z'])
+        molecule_width = {'x':x_width, 'y':y_width, 'z':z_width}
+        return molecule_width
+        
     def __str__(self):
         return "<Molecule " + self.name + " with " + str(self.getNumberOfAtoms()) + " >"
     

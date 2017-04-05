@@ -14,7 +14,7 @@ arg_parser.add_argument("--lenbulk", "-lb", help = "Distance between solute and 
 arg_parser.add_argument("--solvent", help = "Solvent to use in MDFT")
 arg_parser.add_argument("--mmax", help = "Maximum number of orientations of solvent molecules to consider", type=int, default = 1)
 arg_parser.add_argument("--temperature","-T", help = "Temperature to use in MDFT [unit : Celsius degree]", type=float, default = 298.15)
-arg_parser.add_argument("--server", "-sv", help = "Server machine in which MDFT calculations are performed", default = "abalone")
+arg_parser.add_argument("--server", "-sv", help = "Server machine in which MDFT calculations would be performed", default = "abalone")
 mdft_args = arg_parser.parse_args()
 
 topgro_files = mdft_args.topgro+"/"
