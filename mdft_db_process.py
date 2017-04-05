@@ -2,6 +2,7 @@ import os
 import mdft_parser.gromacsParser as gP
 import mdft_parser.parserJson as pJ
 import mdft_writer.mdftWriter as mW
+import mdft_writer.runAllWriter as rAW
 import argparse
 
 arg_parser = argparse.ArgumentParser(prog="mdft_db_process.py", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -13,6 +14,7 @@ arg_parser.add_argument("--lenbulk", "-lb", help = "Distance between solute and 
 arg_parser.add_argument("--solvent", help = "Solvent to use in MDFT")
 arg_parser.add_argument("--mmax", help = "Maximum number of orientations of solvent molecules to consider", type=int, default = 1)
 arg_parser.add_argument("--temperature","-T", help = "Temperature to use in MDFT [unit : Celsius degree]", type=float, default = 298.15)
+arg_parser.add_argument("--server", "-sv", help = "Server machine in which MDFT calculations are performed", default = "abalone")
 mdft_args = arg_parser.parse_args()
 
 topgro_files = mdft_args.topgro+"/"
@@ -24,10 +26,11 @@ if os.path.exists(input_mdft) == False:
     
 input_files = os.listdir(topgro_files)
 
-
 #print json_file
 
 param_mdft = {'lb':mdft_args.lenbulk, 'dx':mdft_args.voxelsize, 'solvent':mdft_args.solvent, 'mmax':mdft_args.mmax, 'temperature':mdft_args.temperature}
+
+run_writer = rAW.runAllWriter() 
 
 for input_file in input_files:    
     input_name = input_file[:-4]
@@ -49,11 +52,12 @@ for input_file in input_files:
                                                                               
         writer = mW.MdftWriter(molecule, param_mdft)
         writer.write(input_mdft+input_name)
-        os.system("cp pc.do "+ input_mdft+input_name)
+        os.system("cp " + run_writer.getDoFile(mdft_args.server)+ " " + input_mdft+input_name)
         #os.chdir(input_mdft+input_name)
         #os.system("./mdft-dev | tee " + input_name +".log")
         #os.chdir("../..")
 
-run_writer = mW.runAllWriter("serversParam.json")        
+ 
+run_writer.writeRunCmd(mdft_args.server)      
 os.system("cp runAll.sh " + input_mdft)        
 os.system("tar -czvf ./input_mdft.tar.gz ./input_mdft/")
