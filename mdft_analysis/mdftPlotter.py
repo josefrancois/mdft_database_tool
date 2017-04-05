@@ -1,22 +1,24 @@
+import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
+plt.style.use('ggplot')
+plt.rcParams['figure.figsize'] = (7.0, 7.0)
+
 class MdftPlotter:
-	def __init__(self, x = [], y = []):
-		self.x = np.array(x)
-		self.y = np.array(y)
-		
-	def plot(self, plot_title, x_legend, y_legend):
-		fig = plt.figure()
-		ax = fig.add_subplot(111)
-		ax.plot(self.x, self.y, "ro")
-		lims = [np.min([ax.get_xlim(), ax.get_ylim()]), np.max([ax.get_xlim(), ax.get_ylim()])]
-		ax.plot(lims, lims, 'b-', alpha=0.75, zorder=0)
-		ax.set_title(plot_title)
-		ax.set_xlabel(x_legend)
-		ax.set_ylabel(y_legend)	
-		corr_coeff = np.corrcoef(self.x, self.y)[0,1]
-		ax.text(np.min([ax.get_xlim(), ax.get_ylim()]), np.max([ax.get_xlim(), ax.get_ylim()]), r'R2 = {:.3f}'.format(corr_coeff), fontsize=12)
-		plt.grid()
-		plt.show()
+    def __init__(self, db = None):
+        self.database = db
+    
+    def plotVS(self, x_column, y_column, x_label, y_label):
+        self.database.plot.scatter(x_column, y_column, figsize = (5,5))
+        x = self.database[x_column]
+        plt.xlim(-30, 5)
+        plt.ylim(-30, 5)
+        plt.plot(range(-30, 6), range(-30,6), lw=2)
+        plt.xlabel(x_label)
+        plt.ylabel(y_label)
+        plt.legend(['Correlation Coefficient  = {:.3f}'.format(self.database[x_column].corr(self.database[y_column]))], shadow = True, edgecolor = 'black')
+        plt.savefig(y_column + "VS" + x_column  + ".pdf", format="pdf", dpi=1000)
+
+        
 
