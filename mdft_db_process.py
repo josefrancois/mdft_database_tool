@@ -15,6 +15,9 @@ arg_parser.add_argument("--solvent", help = "Solvent to use in MDFT")
 arg_parser.add_argument("--mmax", help = "Maximum number of orientations of solvent molecules to consider", type=int, default = 1)
 arg_parser.add_argument("--temperature","-T", help = "Temperature to use in MDFT [unit : Celsius degree]", type=float, default = 298.15)
 arg_parser.add_argument("--server", "-sv", help = "Server machine in which MDFT calculations would be performed", default = "abalone")
+arg_parser.add_argument("--mdftcommit", help = "Commit hash of mdft-dev that should be used", default = None)
+arg_parser.add_argument("--mdftpath", help = "Path of mdft-dev if already compiled", default = None)
+
 mdft_args = arg_parser.parse_args()
 
 topgro_files = mdft_args.topgro+"/"
@@ -52,12 +55,13 @@ for input_file in input_files:
                                                                               
         writer = mW.MdftWriter(molecule, param_mdft)
         writer.write(input_mdft+input_name)
-        os.system("cp " + run_writer.getDoFile(mdft_args.server)+ " " + input_mdft+input_name)
+        os.system("cp ./references/do_files/" + run_writer.getDoFile(mdft_args.server)+ " " + input_mdft+input_name)
         #os.chdir(input_mdft+input_name)
         #os.system("./mdft-dev | tee " + input_name +".log")
         #os.chdir("../..")
-
  
-run_writer.writeRunCmd(mdft_args.server)      
-os.system("cp runAll.sh " + input_mdft)        
+run_writer.write(mdft_args.server, mdft_args.mdftcommit)      
+os.system("cp runAll.sh " + input_mdft)
+if mdft_args.mdftpath is not None :
+    os.system("cp -r " + mdft_args.mdftpath + " " + input_mdft)
 os.system("tar -czvf ./input_mdft.tar.gz ./input_mdft/")
