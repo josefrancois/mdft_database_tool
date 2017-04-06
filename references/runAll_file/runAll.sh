@@ -14,8 +14,7 @@ for folder in *; do
 	    cp mdft-dev/build/mdft-dev $folder
 	    cp -r mdft-dev/build/data $folder
 	    cd $folder
-	    sbatch do
+	    bash pc.do
 	    cd ..
     fi
 done
-
