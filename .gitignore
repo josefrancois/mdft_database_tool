@@ -3,3 +3,6 @@
 input_mdft
 mdft.json
 mobley_db_test.ipynb
+.ipynb_checkpoints
+mdft-dev/
+mini_input_mdft/
