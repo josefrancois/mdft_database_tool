@@ -62,7 +62,7 @@ for input_file in input_files:
         #os.system("./mdft-dev | tee " + input_name +".log")
         #os.chdir("../..")
  
-run_writer.write(mdft_args.server, mdft_args.mdftcommit, mdft_args.mdftpath)      
+run_writer.write(mdft_args.server, mdft_args.mdftcommit)      
 os.system("cp runAll.sh " + input_mdft)
 
 os.system("cp mdft_parse.py " + input_mdft)
@@ -72,4 +72,4 @@ os.system("cp " + json_file+ " " + input_mdft)
 
 if mdft_args.mdftpath is not None :
     os.system("cp -r " + mdft_args.mdftpath + " " + input_mdft)
-os.system("tar -czvf ./input_mdft.tar.gz ./input_mdft/")
+os.system("tar -czvf input_mdft.tar.gz input_mdft")
