@@ -24,3 +24,6 @@ plotter.plotVS('expt', 'calc', expt_label, calc_label)
 
 os.system("cp mdft.json ./mdft_plots")
 
+###########
+###### PLOTTING PROBLEMS !!!!! ==> All points are under bisector with MDFT quantities and we dunno why...
+###########
