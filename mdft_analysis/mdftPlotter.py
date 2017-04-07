@@ -18,7 +18,7 @@ class MdftPlotter:
         plt.xlabel(x_label)
         plt.ylabel(y_label)
         plt.legend(['Correlation Coefficient  = {:.3f}'.format(self.database[x_column].corr(self.database[y_column]))], shadow = True, edgecolor = 'black')
-        plt.savefig(y_column + "VS" + x_column  + ".pdf", format="pdf", dpi=1000)
+        plt.savefig("./mdft_plots/" + y_column + "VS" + x_column  + ".pdf", format="pdf", dpi=1000)
 
         
 
