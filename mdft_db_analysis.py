@@ -22,3 +22,5 @@ for column in ['mdft_energy', 'mdft_energy_pc', 'mdft_energy_pc+', 'functional_a
     
 plotter.plotVS('expt', 'calc', expt_label, calc_label)
 
+os.system("cp mdft.json ./mdft_plots")
+
