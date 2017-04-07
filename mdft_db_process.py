@@ -17,6 +17,7 @@ arg_parser.add_argument("--temperature","-T", help = "Temperature to use in MDFT
 arg_parser.add_argument("--server", "-sv", help = "Server machine in which MDFT calculations would be performed", default = "abalone")
 arg_parser.add_argument("--mdftcommit", help = "Commit hash of mdft-dev that should be used", default = None)
 arg_parser.add_argument("--mdftpath", help = "Path of mdft-dev if already compiled", default = None)
+arg_parser.add_argument("--bridge", "-bg", help = "Bridge Functional to use in MDFT calculations", default = "none")
 
 mdft_args = arg_parser.parse_args()
 
@@ -31,7 +32,8 @@ input_files = os.listdir(topgro_files)
 
 #print json_file
 
-param_mdft = {'lb':mdft_args.lenbulk, 'dx':mdft_args.voxelsize, 'solvent':mdft_args.solvent, 'mmax':mdft_args.mmax, 'temperature':mdft_args.temperature}
+param_mdft = {'lb':mdft_args.lenbulk, 'dx':mdft_args.voxelsize, 'solvent':mdft_args.solvent, \
+              'mmax':mdft_args.mmax, 'temperature':mdft_args.temperature, 'bridge':mdft_args.bridge}
 
 run_writer = rAW.runAllWriter() 
 
@@ -60,8 +62,14 @@ for input_file in input_files:
         #os.system("./mdft-dev | tee " + input_name +".log")
         #os.chdir("../..")
  
-run_writer.write(mdft_args.server, mdft_args.mdftcommit)      
+run_writer.write(mdft_args.server, mdft_args.mdftcommit, mdft_args.mdftpath)      
 os.system("cp runAll.sh " + input_mdft)
+
+os.system("cp mdft_parse.py " + input_mdft)
+os.system("cp -r mdft_parser "  + input_mdft)
+os.system("cp -r mdft_writer "  + input_mdft)
+os.system("cp " + json_file+ " " + input_mdft)
+
 if mdft_args.mdftpath is not None :
     os.system("cp -r " + mdft_args.mdftpath + " " + input_mdft)
 os.system("tar -czvf ./input_mdft.tar.gz ./input_mdft/")

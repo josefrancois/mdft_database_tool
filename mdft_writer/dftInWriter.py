@@ -8,13 +8,15 @@ class DftInWriter:
         self.mmax = None
         self.temperature = None
         self.solvent = None
+        self.bridge = None
         
     def write(self, folder):
         with open(os.path.join(folder, "dft.in"), 'w') as dftin:
             dftin.write("boxnod = {0} {1} {2}".format(self.n['x'],self.n['x'],self.n['x']) + '\n')
             dftin.write("boxlen = {0} {1} {2}".format(float(self.l['x']),float(self.l['y']),float(self.l['z'])) + '\n')
             dftin.write("mmax = " + str(self.mmax) + "\n")
-            dftin.write("temperature = " + str(self.temperature) + "\n")                          
+            dftin.write("temperature = " + str(self.temperature) + "\n")  
+            dftin.write("bridge = " + str(self.bridge) + "\n")                        
             if (self.solvent is not None) :
                 dftin.write("solvent = " + str(self.solvent) + "\n")                          
 
@@ -50,6 +52,9 @@ class DftInWriter:
         
     def setSolvent(self, solvent):
         self.solvent = solvent
+        
+    def setBridge(self, bridge):
+        self.bridge = bridge
 
     def getMmax(self):
         return mmax
@@ -77,3 +82,6 @@ class DftInWriter:
             
     def getSolvent(self):
         return self.solvent
+    
+    def getBridge(self):
+        return self.bridge

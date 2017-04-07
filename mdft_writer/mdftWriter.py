@@ -28,6 +28,8 @@ class MdftWriter:
         if self.parameters['mmax'] is not None:
             dftin.setMmax(self.parameters['mmax'])
         if self.parameters['temperature']is not None:
-            dftin.setTemperature(self.parameters['temperature'])   
+            dftin.setTemperature(self.parameters['temperature'])
+        if self.parameters['bridge'] is not None:
+            dftin.setBridge(self.parameters['bridge'])  
                 
         dftin.write(folder)
