@@ -11,13 +11,18 @@ class MdftPlotter:
     
     def plotVS(self, x_column, y_column, x_label, y_label):
         self.database.plot.scatter(x_column, y_column, figsize = (5,5))
+        limit_min = min(min(self.database[x_column]), min(self.database[y_column])) -10        
+        limit_max = max(max(self.database[x_column]), max(self.database[y_column])) +10
+        #print limit_min, limit_max
+        plt.xlim(limit_min, limit_max)
+        plt.ylim(limit_min, limit_max)
+        plt.plot([limit_min,limit_max], [limit_min,limit_max], lw=2)
+        fit = np.polyfit(self.database[x_column], self.database[y_column], deg = 1)
         x = self.database[x_column]
-        plt.xlim(-30, 5)
-        plt.ylim(-30, 5)
-        plt.plot(range(-30, 6), range(-30,6), lw=2)
+        plt.plot(x, fit[0] * x + fit[1], color='green')
         plt.xlabel(x_label)
         plt.ylabel(y_label)
-        plt.legend(['Correlation Coefficient  = {:.3f}'.format(self.database[x_column].corr(self.database[y_column]))], shadow = True, edgecolor = 'black')
+        plt.legend(["Ideal","Fit equation : y = {1:.3f} + {0:.3f}x\n\t==> R$^2$  = {2:.3f}".format(fit[0], fit[1],self.database[x_column].corr(self.database[y_column]))], shadow = True, edgecolor = 'black')
         plt.savefig("./mdft_plots/" + y_column + "VS" + x_column  + ".pdf", format="pdf", dpi=1000)
 
         
