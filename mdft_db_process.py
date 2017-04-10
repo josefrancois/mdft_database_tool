@@ -23,10 +23,14 @@ mdft_args = arg_parser.parse_args()
 
 topgro_files = mdft_args.topgro+"/"
 json_file = mdft_args.json
-input_mdft = "input_mdft/"
+
+if mdft_args.bridge == 'none' :
+    input_mdft = "input_mdft/"
+else:
+    input_mdft = "input_mdft_"+ mdft_args.bridge +'/'
 
 if os.path.exists(input_mdft) == False:
-    os.mkdir('input_mdft')
+    os.mkdir(input_mdft)
     
 input_files = os.listdir(topgro_files)
 
@@ -44,7 +48,7 @@ for input_file in input_files:
         #print input_name
         pass
     else:
-        os.mkdir(input_mdft+input_name)
+        os.mkdir(input_mdft + input_name)
         print input_name       
         parser = gP.GromacsParser(topgro_files+input_name + ".gro", topgro_files+input_name + ".top")
         molecule = parser.parse()
@@ -62,14 +66,13 @@ for input_file in input_files:
         #os.system("./mdft-dev | tee " + input_name +".log")
         #os.chdir("../..")
  
-run_writer.write(mdft_args.server, mdft_args.mdftcommit)      
-os.system("cp runAll.sh " + input_mdft)
+run_writer.write(mdft_args.server, mdft_args.mdftcommit, input_mdft)      
 
 os.system("cp mdft_parse.py " + input_mdft)
 os.system("cp -r mdft_parser "  + input_mdft)
 os.system("cp -r mdft_writer "  + input_mdft)
-os.system("cp " + json_file+ " " + input_mdft)
+os.system("cp " + json_file + " " + input_mdft)
 
 if mdft_args.mdftpath is not None :
     os.system("cp -r " + mdft_args.mdftpath + " " + input_mdft)
-os.system("tar -czvf input_mdft.tar.gz input_mdft")
+os.system("tar -czvf " + input_mdft[:-1] + ".tar.gz " +input_mdft)

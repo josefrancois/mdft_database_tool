@@ -2,10 +2,10 @@ import json
 
 class runAllWriter:      
     def __init__(self):
-        with open("./references/serversParam/serversParam.json", 'r') as json_param:
+        with open("./references/parameters/serversParam.json", 'r') as json_param:
             self.serv_param = json.load(json_param)
                 
-    def write(self, server_name, commit_hash):                 
+    def write(self, server_name, commit_hash, folder):                 
         with open("./references/runAll_file/runAll.sh", 'r') as frun_in:
             lines = frun_in.readlines()
             for i, line in enumerate(lines):
@@ -15,7 +15,7 @@ class runAllWriter:
                     lines.insert(i+2, "    git checkout " + commit_hash + "\n")
                 
         
-        with open("runAll.sh", 'w') as frun_out:
+        with open(folder + "runAll.sh", 'w') as frun_out:
             frun_out.write("".join(lines))
             
 
