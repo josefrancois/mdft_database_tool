@@ -1,0 +1,12 @@
+{
+	"abalone": {
+			"localisation" : "dist",
+			"runCmd" : "sbatch",
+			"jobFile" : "abalone.do"
+		},
+	"pc": {
+			"localisation" : "local",
+			"runCmd" : "bash",
+			"jobFile" : "pc.do"
+		}
+}
