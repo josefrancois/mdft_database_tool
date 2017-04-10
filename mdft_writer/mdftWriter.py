@@ -14,22 +14,21 @@ class MdftWriter:
         
         solutein.write(folder)
          
-        if self.parameters['lb'] is not None:
-            dftin.setLx(2* self.parameters['lb'] + self.molecule.getMoleculeWidth()['x'])
-            dftin.setLy(2* self.parameters['lb'] + self.molecule.getMoleculeWidth()['y'])
-            dftin.setLz(2* self.parameters['lb'] + self.molecule.getMoleculeWidth()['z'])
-        if self.parameters['dx'] is not None:
-            dftin.setNx(int(dftin.getLx()/self.parameters['dx']))
-            dftin.setNy(int(dftin.getLy()/self.parameters['dx']))
-            dftin.setNz(int(dftin.getLz()/self.parameters['dx']))
-                    
-        if self.parameters['solvent'] is not None:
-            dftin.setSolvent(self.parameters['solvent'])
-        if self.parameters['mmax'] is not None:
-            dftin.setMmax(self.parameters['mmax'])
-        if self.parameters['temperature']is not None:
-            dftin.setTemperature(self.parameters['temperature'])
-        if self.parameters['bridge'] is not None:
-            dftin.setBridge(self.parameters['bridge'])  
+        dftin.setLx(2* self.parameters['lb'] + self.molecule.getMoleculeWidth()['x'])
+        dftin.setLy(2* self.parameters['lb'] + self.molecule.getMoleculeWidth()['y'])
+        dftin.setLz(2* self.parameters['lb'] + self.molecule.getMoleculeWidth()['z'])
+
+        dftin.setNx(int(dftin.getLx()/self.parameters['dx']))
+        dftin.setNy(int(dftin.getLy()/self.parameters['dx']))
+        dftin.setNz(int(dftin.getLz()/self.parameters['dx']))
+                
+
+        dftin.setSolvent(self.parameters['solvent'])
+
+        dftin.setMmax(self.parameters['mmax'])
+
+        dftin.setTemperature(self.parameters['temperature'])
+
+        dftin.setBridge(self.parameters['bridge'])  
                 
         dftin.write(folder)
