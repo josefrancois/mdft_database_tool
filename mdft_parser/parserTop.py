@@ -1,3 +1,5 @@
+import converter as cv
+
 class ParserTop:  
     def __init__(self):
         self.list_name = []
@@ -8,7 +10,8 @@ class ParserTop:
         self.list_sigma = {}
         self.list_epsilon = {}
         
-    def parseAtoms(self, ftop):                                                                
+    def parseAtoms(self, ftop):    
+        converter = cv.Converter()                                                            
         with open(ftop, 'r') as top:         
             for line in top:
                 if line.find('MOL') != -1:
@@ -18,8 +21,8 @@ class ParserTop:
                     self.list_charge.append(float(line.split()[6]))
                     self.list_numatom.append(int(round(float(line.split()[7])/2)))
                 elif line.find('  A  ') != -1:
-                    self.list_sigma[line.split()[0]] = float(line.split()[5])*10
-                    self.list_epsilon[line.split()[0]] = float(line.split()[6])* 4.187      
+                    self.list_sigma[line.split()[0]] = converter.nmToangstrom(float(line.split()[5]))
+                    self.list_epsilon[line.split()[0]] = converter.kcalTokj(float(line.split()[6]))
                     
     def getNumberOfAtoms(self):
         return len(self.list_name)
