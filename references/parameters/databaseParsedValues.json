@@ -1,0 +1,20 @@
+{
+    "calc": {
+        "unit" : "kcal/mol"
+        },
+    "expt" : {
+        "unit" : "kcal/mol"
+        },
+    "mdft_energy" : {
+        "unit" : "kcal/mol"
+        }, 
+    "mdft_energy_pc" : {
+        "unit" : "kcal/mol"
+        }, 
+    "mdft_energy_pc+" : {
+        "unit" : "kcal/mol"
+        }, 
+    "functional_at_min" : {
+        "unit" : "kcal/mol"
+        }
+}      

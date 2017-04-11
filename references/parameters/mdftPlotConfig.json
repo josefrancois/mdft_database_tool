@@ -1,0 +1,65 @@
+{
+    "MDFT vs MD" : {
+        "title" : "Molecular Density Functional Theory vs Molecular Dynamics Simulations",
+        "x" : "x",
+        "x_label" : "Simulated SFE",
+        "y" : "y",
+        "y_label" : "MDFT SFE"
+        },
+    "MD vs Exp" : {
+        "title" : "Molecular Dynamics Simulation vs Experiment",
+        "x" : "x",
+        "x_label" : "Experimental SFE",
+        "y" : "y",
+        "y_label" : "Simulated SFE"
+        },
+    "MDFT vs Exp" : {
+        "title" : "Molecular Density Functional Theory vs Experiment",
+        "x" : "x",
+        "x_label" : "Experimental SFE",
+        "y" : "y",
+        "y_label" : "MDFT SFE",
+        },
+    "Functional at min vs MD" : {
+        "title" : "MDFT Functional at minimum vs Molecular Dynamics Simulations",
+        "x" : "x",
+        "x_label": "Simulated SFE",
+        "y" : "y",
+        "y_label" : "Functional at min"
+        },
+    "Functional at min vs Exp" :{
+        "title" : "MDFT Functional at minimum vs Experiment",
+        "x" : "x",
+        "x_label": "Experimental SFE",
+        "y" : "y",
+        "y_label" : "Functional at min"
+        },
+    "PC MDFT vs MD" : {
+        "title" : "MDFT with Pressure Correction vs Molecular Dynamics Simulations",
+        "x" : "x",
+        "x_label": "Simulated SFE",
+        "y" : "y",
+        "y_label" : "PC MDFT"
+        },
+    "PC MDFT vs Exp" :{
+        "title" : "MDFT with Pressure Correction vs Experiment",
+        "x" : "x",
+        "x_label": "Experimental SFE",
+        "y" : "y",
+        "y_label" : "PC MDFT"
+        },
+    "PC+ MDFT vs MD" : {
+        "title" : "MDFT with Pressure Correction + vs Molecular Dynamics Simulations",
+        "x" : "x",
+        "x_label": "Simulated SFE",
+        "y" : "y",
+        "y_label" : "PC+ MDFT"
+        },
+    "PC+ MDFT vs Exp" :{
+        "title" : "MDFT with Pressure Correction + vs Experiment",
+        "x" : "x",
+        "x_label": "Experimental SFE",
+        "y" : "y",
+        "y_label" : "PC + MDFT"
+        }
+}         
