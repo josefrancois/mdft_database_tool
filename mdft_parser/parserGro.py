@@ -6,10 +6,10 @@ class ParserGro:
         self.list_y = []
         self.list_z = []
         
-    def parseCoord(self, fgro): 
+    def parseCoord(self, fgro):
+        converter = cv.Converter() 
         with open(fgro, 'r') as gro:  
             for line in gro:
-                converter = cv.Converter()
                 if line.find("MOL") != -1:
                     self.list_x.append(converter.nmToangstrom(float(line.split()[4])))
                     self.list_y.append(converter.nmToangstrom(float(line.split()[5])))
