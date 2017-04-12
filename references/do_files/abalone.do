@@ -3,7 +3,7 @@
 ##SBATCH --mail-type=ALL
 ##SBATCH --mail-user=my-email-address-at-ENS
 #SBATCH --time=24:00:00
-#SBATCH --ntasks=1
+#SBATCH --ntasks=6
 
 # PLEASE DO NOT TOUCH THE FOLLOWING LINE
 source /etc/slurm-llnl/slurm-setup.sh
@@ -26,8 +26,8 @@ rsync -av --update ${SLURM_SUBMIT_DIR}/ .
 # Execute the code
 #mpirun --bind-to none ${EXE} md.in > md.out
 
-export OMP_NUM_THREADS = 16
-/usr/bin/time -f "Maximum resident set size of the process during its lifetime in Kilobytes: %M" mdft-dev
+export OMP_NUM_THREADS=6
+/usr/bin/time -f "Maximum resident set size of the process during its lifetime in Kilobytes: %M" ./mdft-dev
 
 # Store the exit status of the parallel job, whether it was successful or not
 MYSTATUS=$?
