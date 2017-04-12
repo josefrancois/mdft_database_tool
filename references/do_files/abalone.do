@@ -26,7 +26,7 @@ rsync -av --update ${SLURM_SUBMIT_DIR}/ .
 # Execute the code
 #mpirun --bind-to none ${EXE} md.in > md.out
 
-export OMP_NUM_THREADS = 6
+export OMP_NUM_THREADS = 16
 /usr/bin/time -f "Maximum resident set size of the process during its lifetime in Kilobytes: %M" mdft-dev
 
 # Store the exit status of the parallel job, whether it was successful or not
