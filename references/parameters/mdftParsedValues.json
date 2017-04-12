@@ -1,8 +1,20 @@
 {
-    "ENERGY" : -1,
-    "Functional at min" : -2,
-    "PC " : -2,
-    "PC+" : -2,
-    "PMV" : -2,
-    "Pid" : -2
+    "ENERGY" : {
+        "position" : -1
+        },
+    "Functional at min" : 
+        "position" : -2
+        },
+    "PC " : {
+        "position" : -2
+        },
+    "PC+" : {
+        "position": -2
+        },
+    "PMV" : {
+        "position" : -2
+        },
+    "Pid" : {
+        "position" : -2
+        }
 }
