@@ -38,4 +38,3 @@ class GromacsParser:
         #print molecule
               
         return molecule
-        
