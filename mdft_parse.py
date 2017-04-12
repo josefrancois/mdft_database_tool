@@ -21,7 +21,7 @@ for solute_dir in solute_dirs:
 			pJson.parseData(json_file, solute_dir)
 			pLog.parse(solute_dir+'/'+log_file)
 			data_solute = pJson.getDataSolute()
-			# ALL QUANTITIES IN KCAL/MOL !!!!!!!!
+            ### All quantities in kcal/mol
 			data_solute['mdft_energy'] = converter.kjTokcal(float(pLog.getMdftEnergy()))
 			data_solute['functional_at_min'] = converter.kjTokcal(float(pLog.getFunctionalAtMin()))
 			data_solute['mdft_energy_pc'] = converter.kjTokcal(float(pLog.getMdftEnergyPc()))
