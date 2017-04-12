@@ -1,9 +1,9 @@
 class Converter:
-    def kjTokcal(self, value):
-        return value * 0.239006
+    def kjTokcal(self, energy_kj):
+        return energy_kj * 0.239006
         
-    def nmToangstrom(self, value):
-        return value * 10
+    def nmToangstrom(self, length):
+        return length * 10
         
-    def kcalTokj(self, value):
-        return value * 4.187
+    def kcalTokj(self, energy_kcal):
+        return energy_kcal * 4.187
