@@ -14,9 +14,9 @@ class MdftWriter:
         
         solutein.write(folder)
          
-        dftin.setLx(2* self.parameters['lb'] + self.molecule.getMoleculeWidth()['x'])
-        dftin.setLy(2* self.parameters['lb'] + self.molecule.getMoleculeWidth()['y'])
-        dftin.setLz(2* self.parameters['lb'] + self.molecule.getMoleculeWidth()['z'])
+        dftin.setLx(int(2* self.parameters['lb'] + self.molecule.getMoleculeWidth()['x'])+1)
+        dftin.setLy(int(2* self.parameters['lb'] + self.molecule.getMoleculeWidth()['y'])+1)
+        dftin.setLz(int(2* self.parameters['lb'] + self.molecule.getMoleculeWidth()['z'])+1)
 
         dftin.setNx(int(dftin.getLx()/self.parameters['dx']))
         dftin.setNy(int(dftin.getLy()/self.parameters['dx']))
