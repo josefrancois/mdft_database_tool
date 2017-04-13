@@ -27,6 +27,16 @@ class MdftPlotter:
         rmse = np.sqrt(((self.database[y_column] - self.database[x_column]) ** 2).mean())
         plt.legend(["Ideal","Fit equation : y = {1:.3f} + {0:.3f}x\n\tR$^2$  = {2:.3f} | RMSE = {3:.3f}".format(fit[0], fit[1], self.database[x_column].corr(self.database[y_column]), rmse)], shadow = True, edgecolor = 'black')
         plt.savefig("./"+self.plots_dir+"/" + y_column + "VS" + x_column, format="png", dpi = 130)
+        
+    def plotEnrichmentCurve(self, x_column, y_column):
+        diff = abs(self.database[x_column] - self.database[y_column])
+        diff_label = "{0}-{1}".format(x_column, y_column)
+        sorted_diff = diff.sort_values()
+        pc_db = pd.Series(np.arange(1,len(diff)+1), index=sorted_diff.index)/len(diff)*100
+        enrichment_db = pd.concat([sorted_diff, pc_db], axis=1)
+        enrichment_db.columns = [diff_label, '% ranked database']
+        enrichment_db.plot(diff_label, "% ranked database", title = 'Enrichment curve')
+        plt.savefig("./"+self.plots_dir+"/" + y_column + "-" + x_column, format="png", dpi = 130)
 
         
 

@@ -23,6 +23,7 @@ with open("references/parameters/mdftPlotConfig.json", 'r') as json_plots:
 plotter = mP.MdftPlotter(mdft_db, plots_dir)
 for plot in mdft_plots:
     plotter.plotVS(mdft_plots[plot]['x'], mdft_plots[plot]['y'], mdft_plots[plot]['x_label'], mdft_plots[plot]['y_label'], unit, mdft_plots[plot]['title'])
+    plotter.plotEnrichmentCurve(mdft_plots[plot]['x'], mdft_plots[plot]['y'])
     
 
 os.system("cp " + mdft_args.json + " ./"+plots_dir)
