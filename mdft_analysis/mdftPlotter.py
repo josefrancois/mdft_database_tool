@@ -35,7 +35,8 @@ class MdftPlotter:
         pc_db = pd.Series(np.arange(1,len(diff)+1), index=sorted_diff.index)/len(diff)*100
         enrichment_db = pd.concat([sorted_diff, pc_db], axis=1)
         enrichment_db.columns = [diff_label, '% ranked database']
-        enrichment_db.plot(diff_label, "% ranked database", title = 'Enrichment curve')
+        enrichment_db.plot(diff_label, "% ranked database", title = 'Enrichment curve', ylim=(0,100))
+        plt.plot([0,max(enrichment_db[diff_label])], [0,max(enrichment_db['% ranked database'])]) 
         plt.savefig("./"+self.plots_dir+"/" + y_column + "-" + x_column, format="png", dpi = 130)
 
         
