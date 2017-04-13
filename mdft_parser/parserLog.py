@@ -28,7 +28,7 @@ class ParserLog:
 		return self.mdft_energy
 		
 	def getFunctionalAtMin(self):
-		return self.mdft_energy
+		return self.functional_at_min
 		
 	def getMdftEnergyPc(self):
 		return self.mdft_energy_pc
