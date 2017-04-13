@@ -1,11 +1,11 @@
 *.pyc
 *~
 input_mdft
-mdft.json
+mdft*.json
 .ipynb_checkpoints
 mdft-dev/
 mini_input_mdft/
 runAll.sh
 mdft_db_test.ipynb
-mdft_plots/
+*_plots/
 input_mdft.tar.gz

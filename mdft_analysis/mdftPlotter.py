@@ -6,8 +6,9 @@ plt.style.use('ggplot')
 plt.rcParams['figure.figsize'] = (7.0, 7.0)
 
 class MdftPlotter:
-    def __init__(self, db = None):
+    def __init__(self, db = None, plots_dir = None):
         self.database = db
+        self.plots_dir = plots_dir
         
     def plotVS(self, x_column, y_column, x_label, y_label, unit, title):
         self.database.plot.scatter(x_column, y_column, figsize = (5,5))
@@ -25,7 +26,7 @@ class MdftPlotter:
         plt.ylabel(y_label + " ({0})".format(unit))
         rmse = np.sqrt(((self.database[y_column] - self.database[x_column]) ** 2).mean())
         plt.legend(["Ideal","Fit equation : y = {1:.3f} + {0:.3f}x\n\tR$^2$  = {2:.3f} | RMSE = {3:.3f}".format(fit[0], fit[1], self.database[x_column].corr(self.database[y_column]), rmse)], shadow = True, edgecolor = 'black')
-        plt.savefig("./mdft_plots/" + y_column + "VS" + x_column, format="png", dpi = 130)
+        plt.savefig("./"+self.plots_dir+"/" + y_column + "VS" + x_column, format="png", dpi = 130)
 
         
 
