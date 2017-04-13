@@ -3,63 +3,63 @@
         "MDFT vs MD" : {
             "title" : "Molecular Density Functional Theory vs Molecular Dynamics Simulations",
             "x" : "calc",
-            "x_label" : "Simulated SFE",
+            "x_label" : "Molecular Dynamics",
             "y" : "mdft_energy",
             "y_label" : "MDFT SFE"
             },
         "MD vs Exp" : {
             "title" : "Molecular Dynamics Simulation vs Experiment",
             "x" : "expt",
-            "x_label" : "Experimental SFE",
+            "x_label" : "Experimental",
             "y" : "calc",
-            "y_label" : "Simulated SFE"
+            "y_label" : "Molecular Dynamics"
             },
         "MDFT vs Exp" : {
             "title" : "Molecular Density Functional Theory vs Experiment",
             "x" : "expt",
-            "x_label" : "Experimental SFE",
+            "x_label" : "Experimental",
             "y" : "calc",
             "y_label" : "MDFT SFE"
             },
         "Functional at min vs MD" : {
             "title" : "MDFT Functional at minimum vs Molecular Dynamics Simulations",
             "x" : "calc",
-            "x_label": "Simulated SFE",
+            "x_label": "Molecular Dynamics",
             "y" : "functional_at_min",
             "y_label" : "Functional at min"
             },
         "Functional at min vs Exp" : {
             "title" : "MDFT Functional at minimum vs Experiment",
             "x" : "expt",
-            "x_label": "Experimental SFE",
+            "x_label": "Experimental",
             "y" : "functional_at_min",
             "y_label" : "Functional at min"
             },
         "PC MDFT vs MD" : {
             "title" : "MDFT with Pressure Correction vs Molecular Dynamics Simulations",
             "x" : "calc",
-            "x_label": "Simulated SFE",
+            "x_label": "Molecular Dynamics",
             "y" : "mdft_energy_pc",
             "y_label" : "PC MDFT"
             },
         "PC MDFT vs Exp" : {
             "title" : "MDFT with Pressure Correction vs Experiment",
             "x" : "expt",
-            "x_label": "Experimental SFE",
+            "x_label": "Experimental",
             "y" : "mdft_energy_pc",
             "y_label" : "PC MDFT"
             },
         "PC+ MDFT vs MD" : {
             "title" : "MDFT with Pressure Correction + vs Molecular Dynamics Simulations",
             "x" : "calc",
-            "x_label": "Simulated SFE",
+            "x_label": "Molecular Dynamics",
             "y" : "mdft_energy_pc+",
             "y_label" : "PC+ MDFT"
             },
         "PC+ MDFT vs Exp" : {
             "title" : "MDFT with Pressure Correction + vs Experiment",
             "x" : "expt",
-            "x_label": "Experimental SFE",
+            "x_label": "Experimental",
             "y" : "mdft_energy_pc+",
             "y_label" : "PC+ MDFT"
             }
