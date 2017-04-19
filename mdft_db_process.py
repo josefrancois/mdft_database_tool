@@ -9,7 +9,7 @@ arg_parser = argparse.ArgumentParser(prog="mdft_db_process.py", formatter_class=
 
 arg_parser.add_argument("--json", help = "JSON file to parse", default = "mobley.json")
 arg_parser.add_argument("--topgro", help = "Folder which contains top and gro files to parse", default = "minitopgro")
-arg_parser.add_argument("--voxelsize", "-dx", help = "Distance beween two nodes [unit : angstroms]", type=float, default = 0.5)
+arg_parser.add_argument("--voxelsize", "-dx", help = "Distance between two nodes [unit : angstroms]", type=float, default = 0.5)
 arg_parser.add_argument("--lenbulk", "-lb", help = "Distance between solute and box sides [unit : angstroms]", type=int, default = 10)
 arg_parser.add_argument("--solvent", help = "Solvent to use in MDFT")
 arg_parser.add_argument("--mmax", help = "Maximum number of orientations of solvent molecules to consider", type=int, default = 1)

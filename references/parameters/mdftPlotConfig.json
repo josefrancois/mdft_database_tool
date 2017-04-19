@@ -18,7 +18,7 @@
             "title" : "Molecular Density Functional Theory vs Experiment",
             "x" : "expt",
             "x_label" : "Experimental",
-            "y" : "calc",
+            "y" : "mdft_energy",
             "y_label" : "MDFT SFE"
             },
         "Functional at min vs MD" : {
