@@ -12,7 +12,7 @@ class DftInWriter:
         
     def write(self, folder):
         with open(os.path.join(folder, "dft.in"), 'w') as dftin:
-            dftin.write("boxnod = {0} {1} {2}".format(self.n['x'],self.n['x'],self.n['x']) + '\n')
+            dftin.write("boxnod = {0} {1} {2}".format(self.n['x'],self.n['y'],self.n['z']) + '\n')
             dftin.write("boxlen = {0} {1} {2}".format(float(self.l['x']),float(self.l['y']),float(self.l['z'])) + '\n')
             dftin.write("mmax = " + str(self.mmax) + "\n")
             dftin.write("temperature = " + str(self.temperature) + "\n")  
