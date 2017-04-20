@@ -5,6 +5,7 @@ import numpy as np
 plt.style.use('ggplot')
 plt.rcParams['figure.figsize'] = (7.0, 7.0)
 
+
 class MdftPlotter:
     def __init__(self, db = None, plots_dir = None):
         self.database = db
@@ -12,21 +13,22 @@ class MdftPlotter:
         
     def plotVS(self, x_column, y_column, x_label, y_label, unit, title):
         self.database.plot.scatter(x_column, y_column, figsize = (5,5))
-        limit_min = min(min(self.database[x_column]), min(self.database[y_column])) -10        
-        limit_max = max(max(self.database[x_column]), max(self.database[y_column])) +10
+        limit_min = min(min(self.database[x_column]), min(self.database[y_column])) -2        
+        limit_max = max(max(self.database[x_column]), max(self.database[y_column])) +2
         #print limit_min, limit_max
         plt.xlim(limit_min, limit_max)
         plt.ylim(limit_min, limit_max)
-        plt.plot([limit_min,limit_max], [limit_min,limit_max], lw=2)
+        plt.plot([limit_min,limit_max], [limit_min,limit_max], lw=0.5)
+        rmse = np.sqrt(((self.database[y_column] - self.database[x_column]) ** 2).mean())
         fit = np.polyfit(self.database[x_column], self.database[y_column], deg = 1)
         x = self.database[x_column]
-        plt.plot(x, fit[0] * x + fit[1], color='green')
+        plt.plot(x, fit[0] * x + fit[1], color='green', label="Fit equation : y = {1:.3f} + {0:.3f}x\n\tR$^2$  = {2:.3f} | RMSE = {3:.3f}"\
+        .format(fit[0], fit[1], self.database[x_column].corr(self.database[y_column]), rmse))
         plt.title(title, fontsize=8)
         plt.xlabel(x_label + " ({0})".format(unit))
         plt.ylabel(y_label + " ({0})".format(unit))
-        rmse = np.sqrt(((self.database[y_column] - self.database[x_column]) ** 2).mean())
-        plt.legend(["Ideal","Fit equation : y = {1:.3f} + {0:.3f}x\n\tR$^2$  = {2:.3f} | RMSE = {3:.3f}".format(fit[0], fit[1], self.database[x_column].corr(self.database[y_column]), rmse)], shadow = True, edgecolor = 'black')
-        plt.savefig("./"+self.plots_dir+"/" + y_column + "VS" + x_column, format="png", dpi = 130)
+        plt.legend(shadow = True, edgecolor = 'black', bbox_to_anchor=(1, 0.5))
+        plt.savefig("./"+self.plots_dir+"/" + y_column + "VS" + x_column +".png", format="png", dpi = 130, bbox_inches='tight', edgecolor='black')
         
     def plotEnrichmentCurve(self, x_column, y_column):
         diff = abs(self.database[x_column] - self.database[y_column])
