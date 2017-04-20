@@ -23,7 +23,7 @@ for solute_dir in solute_dirs:
 			data_solute = pJson.getDataSolute()
             ### All quantities in kcal/mol
 			data_solute['mdft_energy'] = converter.kjTokcal(float(pLog.getMdftEnergy()))
-			data_solute['functional_at_min'] = converter.kjTokcal(float(pLog.getFunctionalAtMin()))
+			data_solute['delta_omega'] = converter.kjTokcal(float(pLog.getFunctionalAtMin()))
 			data_solute['mdft_energy_pc'] = converter.kjTokcal(float(pLog.getMdftEnergyPc()))
 			data_solute['mdft_energy_pc+'] = converter.kjTokcal(float(pLog.getMdftEnergyPcPlus()))
 			data_solute['mdft_energy_pmv'] = converter.kjTokcal(float(pLog.getMdftEnergyPmv()))
