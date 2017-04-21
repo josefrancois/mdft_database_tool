@@ -1,4 +1,5 @@
 class ParserLog:
+    "Definition of a MDFT output files parser"
 	def __init__(self):
 		self.mdft_energy = ''
 		self.functional_at_min = ''

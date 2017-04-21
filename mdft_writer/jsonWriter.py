@@ -2,6 +2,7 @@ import json
 
 
 class JsonWriter:
+    "Definition of a JSON file writer"
         def __init__(self, infos = {}):
                 self.infos = infos
         

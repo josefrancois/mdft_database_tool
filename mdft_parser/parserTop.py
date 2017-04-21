@@ -1,6 +1,7 @@
 import converter as cv
 
-class ParserTop:  
+class ParserTop:
+    "Definition of a parser for GROMACS .top files to get the needed infos about the atoms"  
     def __init__(self):
         self.list_name = []
         self.list_atomtype = []

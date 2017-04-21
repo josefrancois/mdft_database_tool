@@ -1,4 +1,5 @@
 class Converter:
+    "Definition of a converter"
     def kjTokcal(self, energy_kj):
         return energy_kj * 0.239006
         

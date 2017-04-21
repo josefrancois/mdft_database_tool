@@ -2,6 +2,7 @@ import os
 
 
 class DftInWriter:
+    "Definition of a dft.in file writer for MDFT"
     def __init__(self):
         self.l = {'x': None, 'y': None, 'z': None}
         self.n = {'x': None, 'y': None, 'z': None}

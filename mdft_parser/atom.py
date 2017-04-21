@@ -1,4 +1,5 @@
 class Atom:
+    "Definition of an atom by its name, number, type, coordinates, charge, epsilon, sigma and atomic number"
     def __init__(self, name = '', num = 1, atype = '', coord = {'x':0.0, 'y':0.0, 'z':0.0},  q = 0.0, eps = 0.0, sig = 0.0, numatm = 1):
         self.name = name
         self.num = num

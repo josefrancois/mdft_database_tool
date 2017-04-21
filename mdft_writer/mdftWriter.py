@@ -3,6 +3,7 @@ from soluteInWriter import *
 
 
 class MdftWriter:
+    "This class uses infos from parsers and submitted parameters to write the wanted dft.in and solute.in files for each molecule"
     def __init__(self, molecule = None, parameters = {}):
         self.molecule = molecule
         self.parameters = parameters

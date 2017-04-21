@@ -1,6 +1,7 @@
 import os
 
 class SoluteInWriter:
+    "Definition of a solute.in file writer"
     def __init__(self, molecule = None):
         self.molecule = molecule
                       

@@ -1,3 +1,6 @@
+"""
+"""
+
 import os
 import mdft_parser.gromacsParser as gP
 import mdft_parser.parserJson as pJ
@@ -18,6 +21,7 @@ arg_parser.add_argument("--server", "-sv", help = "Server machine in which MDFT 
 arg_parser.add_argument("--mdftcommit", help = "Commit hash of mdft-dev that should be used", default = None)
 arg_parser.add_argument("--mdftpath", help = "Path of mdft-dev if already compiled", default = None)
 arg_parser.add_argument("--bridge", "-bg", help = "Bridge Functional to use in MDFT calculations", default = "none")
+
 
 mdft_args = arg_parser.parse_args()
 
@@ -55,8 +59,8 @@ for input_file in input_files:
                                                     
         fjson = pJ.ParserJson()
         fjson.parseData(json_file, input_name)
-        molecule.setData(fjson.getDataSolute() )
-        molecule.setName(fjson.getSoluteName() )
+        molecule.setData(fjson.getData() )
+        molecule.setName(fjson.getRecordName() )
         #print molecule.getData
                                                                               
         writer = mW.MdftWriter(molecule, param_mdft)

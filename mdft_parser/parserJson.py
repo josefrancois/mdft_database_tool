@@ -1,19 +1,21 @@
 import json
 
-class ParserJson:  
-    def __init__(self, solute_name = '', data_solute = {}):
-        self.solute_name = solute_name
-        self.data_solute = {}
+class ParserJson:
+    "Definition of a parser for JSON files"  
+    def __init__(self, record = '', data_record = {}):
+        self.record = record
+        self.data_record = {}
 
-    def parseData(self, fjson, name):
-        self.solute_name = name        
+    def parseData(self, fjson, record_name):
+        #Parse the data about the record 'record_name' in the JSON file 'fjson' 
+        self.record = record_name        
         with open(fjson, 'r') as json_file:            
-            solute_db = json.load(json_file)
-            self.data_solute = solute_db[self.solute_name]    
+            json_db = json.load(json_file)
+            self.data_record = json_db[self.record]    
 
-    def getSoluteName(self):
-        return self.solute_name
+    def getRecordName(self):
+        return self.record
         
-    def getDataSolute(self):
-        return self.data_solute
+    def getData(self):
+        return self.data_record
     

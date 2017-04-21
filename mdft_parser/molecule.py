@@ -1,4 +1,5 @@
 class Molecule():
+    "Definition of a molecule by its name, list of atoms, data and its width"
     def __init__(self, name = '', data = {}, wth = 0.0):
         self.name = name
         self.list_atoms = []

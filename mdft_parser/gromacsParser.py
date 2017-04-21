@@ -6,18 +6,19 @@ from parserJson import *
 
 
 class GromacsParser:
+    "This class manages which .gro and .top files to parse and submit them to .gro (parserGro) and .top (parserTop) parsers"
     def __init__(self, gro_filename = '', top_filename = ''):
         self.gro_filename = gro_filename
         self.top_filename = top_filename
 
 
     def parse(self):
+        #Parse data from given .gro and .top files reformat them to generate atoms, then molecules"
         gro = ParserGro()
         top = ParserTop()
-        
-        
         gro.parseCoord(self.gro_filename)
         top.parseAtoms(self.top_filename)
+        
         molecule = Molecule()
         #print molecule
         

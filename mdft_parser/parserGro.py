@@ -1,13 +1,14 @@
 import converter as cv
 
-class ParserGro:  
+class ParserGro:
+    "Definition of a parser for GROMACS .gro files to retrieve the atom coordintates"  
     def __init__(self):
         self.list_x = []
         self.list_y = []
         self.list_z = []
         
     def parseCoord(self, fgro):
-        converter = cv.Converter() 
+        converter = cv.Converter() # => in order to convert from nm to angstrom for MDFT
         with open(fgro, 'r') as gro:  
             for line in gro:
                 if line.find("MOL") != -1:
