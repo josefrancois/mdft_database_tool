@@ -9,3 +9,6 @@ runAll.sh
 mdft_db_test.ipynb
 *_plots/
 input_mdft.tar.gz
+*.png
+*.pdf
+input_mdft_mmax1_ref
