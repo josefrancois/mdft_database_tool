@@ -13,5 +13,5 @@ class SoluteInWriter:
             solutein.write("{0:8s}{1:10s}{2:15s}{3:20s}{4:10s}{5:10s}{6:9s}{7}\n"\
             .format("#","charge", "sigma(Ang)", "epsilon(kJ/mol)", "x", "y", "z", "Zatomic"))
             for atom in self.molecule.getListAtoms():
-                solutein.write("{0:5s}{1:10.6f}{2:10.5f}{3:20.5f}{4:10.3f}{5:10.3f}{6:10.3f}{7:10d}\n"\
+                solutein.write("{0:5s}{1:10.6f}{2:10.6f}{3:20.6f}{4:10.3f}{5:10.3f}{6:10.3f}{7:10d}\n"\
                 .format(atom.getNum(), atom.getCharge(), atom.getSigma(), atom.getEpsilon(), atom.getCoord()['x'], atom.getCoord()['y'], atom.getCoord()['z'], atom.getNumatm()))
