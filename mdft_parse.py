@@ -20,7 +20,7 @@ for solute_dir in solute_dirs:
 			log_file = mdft_file
 			pJson.parseData(json_file, solute_dir)
 			pLog.parse(solute_dir+'/'+log_file)
-			data_solute = pJson.getDataSolute()
+			data_solute = pJson.getData()
             ### All quantities in kcal/mol
 			data_solute['mdft_energy'] = converter.kjTokcal(float(pLog.getMdftEnergy()))
 			data_solute['delta_omega'] = converter.kjTokcal(float(pLog.getFunctionalAtMin()))

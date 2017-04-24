@@ -21,19 +21,19 @@
             "y" : "mdft_energy",
             "y_label" : "MDFT SFE"
             },
-        "Functional at min vs MD" : {
-            "title" : "MDFT Functional at minimum vs Molecular Dynamics Simulations",
+        "Delta Omega vs MD" : {
+            "title" : "MDFT Delta Omega vs Molecular Dynamics Simulations",
             "x" : "calc",
             "x_label": "Molecular Dynamics",
-            "y" : "functional_at_min",
-            "y_label" : "Functional at min"
+            "y" : "delta_omega",
+            "y_label" : "Delta Omega"
             },
-        "Functional at min vs Exp" : {
-            "title" : "MDFT Functional at minimum vs Experiment",
+        "Delta Omega vs Exp" : {
+            "title" : "MDFT Delta Omega vs Experiment",
             "x" : "expt",
             "x_label": "Experimental",
-            "y" : "functional_at_min",
-            "y_label" : "Functional at min"
+            "y" : "delta_omega",
+            "y_label" : "Delta Omega"
             },
         "PC MDFT vs MD" : {
             "title" : "MDFT with Pressure Correction vs Molecular Dynamics Simulations",
