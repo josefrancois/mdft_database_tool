@@ -30,6 +30,8 @@ class MdftWriter:
 
         dftin.setTemperature(self.parameters['temperature'])
 
-        dftin.setBridge(self.parameters['bridge'])  
+        dftin.setBridge(self.parameters['bridge'])
+        
+        dftin.setSCSF(self.parameters['solute_charges_scale_factor'])  
                 
         dftin.write(folder)

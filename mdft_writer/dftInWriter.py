@@ -10,6 +10,7 @@ class DftInWriter:
         self.temperature = None
         self.solvent = None
         self.bridge = None
+        self.scsf = None
         
     def write(self, folder):
         with open(os.path.join(folder, "dft.in"), 'w') as dftin:
@@ -17,7 +18,8 @@ class DftInWriter:
             dftin.write("boxlen = {0} {1} {2}".format(float(self.l['x']),float(self.l['y']),float(self.l['z'])) + '\n')
             dftin.write("mmax = " + str(self.mmax) + "\n")
             dftin.write("temperature = " + str(self.temperature) + "\n")  
-            dftin.write("bridge = " + str(self.bridge) + "\n")                        
+            dftin.write("bridge = " + str(self.bridge) + "\n")
+            dftin.write("solute_charges_scale_factor = " + str(self.scsf) + "\n")                        
             if (self.solvent is not None) :
                 dftin.write("solvent = " + str(self.solvent) + "\n")                          
 
@@ -56,6 +58,9 @@ class DftInWriter:
         
     def setBridge(self, bridge):
         self.bridge = bridge
+        
+    def setSCSF(self, scsf):#scsf => Solute charges scale factor
+        self.scsf = scsf
 
     def getMmax(self):
         return mmax
@@ -86,3 +91,6 @@ class DftInWriter:
     
     def getBridge(self):
         return self.bridge
+        
+    def getSCSF(self):
+        return self.scsf

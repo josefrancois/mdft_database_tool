@@ -21,6 +21,7 @@ arg_parser.add_argument("--server", "-sv", help = "Server machine in which MDFT 
 arg_parser.add_argument("--mdftcommit", help = "Commit hash of mdft-dev that should be used", default = None)
 arg_parser.add_argument("--mdftpath", help = "Path of mdft-dev if already compiled", default = None)
 arg_parser.add_argument("--bridge", "-bg", help = "Bridge Functional to use in MDFT calculations", default = "none")
+arg_parser.add_argument("--solute_charges_scale_factor", "-scsf", help = "Solute charges factor which indicates how much we consider the influence of the partial charges", default = 1)
 
 
 mdft_args = arg_parser.parse_args()
@@ -41,7 +42,8 @@ input_files = os.listdir(topgro_files)
 #print json_file
 
 param_mdft = {'lb':mdft_args.lenbulk, 'dx':mdft_args.voxelsize, 'solvent':mdft_args.solvent, \
-              'mmax':mdft_args.mmax, 'temperature':mdft_args.temperature, 'bridge':mdft_args.bridge}
+              'mmax':mdft_args.mmax, 'temperature':mdft_args.temperature, 'bridge':mdft_args.bridge, \
+              'solute_charges_scale_factor':mdft_args.solute_charges_scale_factor}
 
 run_writer = rAW.runAllWriter() 
 
