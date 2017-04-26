@@ -22,14 +22,17 @@ for solute_dir in solute_dirs:
 			pLog.parse(solute_dir+'/'+log_file)
 			data_solute = pJson.getData()
             ### All quantities in kcal/mol
-			data_solute['mdft_energy'] = converter.kjTokcal(float(pLog.getMdftEnergy()))
-			data_solute['delta_omega'] = converter.kjTokcal(float(pLog.getFunctionalAtMin()))
-			data_solute['mdft_energy_pc'] = converter.kjTokcal(float(pLog.getMdftEnergyPc()))
-			data_solute['mdft_energy_pc+'] = converter.kjTokcal(float(pLog.getMdftEnergyPcPlus()))
-			data_solute['mdft_energy_pmv'] = converter.kjTokcal(float(pLog.getMdftEnergyPmv()))
-			data_solute['mdft_energy_pid'] = converter.kjTokcal(float(pLog.getMdftEnergyPid()))
+			if pLog.getMdftEnergy() != 'NaN':
+				data_solute['mdft_energy'] = converter.kjTokcal(float(pLog.getMdftEnergy()))
+				data_solute['delta_omega'] = converter.kjTokcal(float(pLog.getFunctionalAtMin()))
+				data_solute['mdft_energy_pc'] = converter.kjTokcal(float(pLog.getMdftEnergyPc()))
+				data_solute['mdft_energy_pc+'] = converter.kjTokcal(float(pLog.getMdftEnergyPcPlus()))
+				#data_solute['mdft_energy_pmv'] = converter.kjTokcal(float(pLog.getMdftEnergyPmv()))
+				#data_solute['mdft_energy_pid'] = converter.kjTokcal(float(pLog.getMdftEnergyPid()))
+				mdft_database[solute_dir] = data_solute
+			else:
+				pass
 			print solute_dir
-			mdft_database[solute_dir] = data_solute
 
 newJson = jW.JsonWriter(mdft_database)
 newJson.write('mdft.json')
