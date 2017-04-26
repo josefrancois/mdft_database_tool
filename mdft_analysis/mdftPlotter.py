@@ -1,8 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import seaborn as sns
 
-plt.style.use('ggplot')
+plt.style.use('classic')
 plt.rcParams['figure.figsize'] = (7.0, 7.0)
 
 
@@ -24,12 +25,18 @@ class MdftPlotter:
         x = self.database[x_column]
         plt.plot(x, fit[0] * x + fit[1], color='green', label="Fit equation : y = {1:.3f} + {0:.3f}x\n\tR$^2$  = {2:.3f} | RMSE = {3:.3f}"\
         .format(fit[0], fit[1], self.database[x_column].corr(self.database[y_column]), rmse))
-        plt.title(title, fontsize=8)
+        plt.title(title+" with {0} solutes".format(self.database.shape[0]), fontsize=8)
         plt.xlabel(x_label + " ({0})".format(unit))
         plt.ylabel(y_label + " ({0})".format(unit))
-        plt.legend(shadow = True, edgecolor = 'black', bbox_to_anchor=(1, 0.5))
+        plt.legend(shadow = True, edgecolor = 'black', bbox_to_anchor=(1.7, 0.3))
         plt.savefig("./"+self.plots_dir+"/" + y_column + "VS" + x_column +".png", format="png", dpi = 130, bbox_inches='tight', edgecolor='black')
         
+        
+    def plotErrorDistribution(self, mdft_db_errors, name):   
+        plt.figure()          
+        sns.violinplot(data=mdft_db_errors, orient='h').set_title("Error distribution (kcal/mol)"+" with {0} solutes".format(self.database.shape[0]))
+        plt.savefig("./"+self.plots_dir+"/"+name+".png", format="png",bbox_inches='tight')
+"""        
     def plotEnrichmentCurve(self, x_column, y_column):
         diff = abs(self.database[x_column] - self.database[y_column])
         diff_label = "{0}-{1}".format(x_column, y_column)
@@ -39,7 +46,8 @@ class MdftPlotter:
         enrichment_db.columns = [diff_label, '% ranked database']
         enrichment_db.plot(diff_label, "% ranked database", title = 'Enrichment curve', ylim=(0,100), xlim=(0, max(enrichment_db[diff_label])))
         plt.plot([0,max(enrichment_db[diff_label])], [0,max(enrichment_db['% ranked database'])]) 
-        plt.savefig("./"+self.plots_dir+"/" + y_column + "-" + x_column, format="png", dpi = 130)
-
+        plt.savefig("./"+self.plots_dir+"/" + y_column + "-" + x_column+".png", format="png", dpi = 130)
+"""        
+    
         
 
