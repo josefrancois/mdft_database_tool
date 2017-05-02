@@ -6,14 +6,6 @@ class ParserLog:
     def __init__(self):
         with open('references/parameters/mdftParsedValues.json' , 'r') as fjson:
             self.mdft_values = json.load(fjson)
-            
-            
-        #self.mdft_energy = ''
-        #self.functional_at_min = ''
-        #self.mdft_energy_pc = ''
-        #self.mdft_energy_pc_plus = ''
-        #self.mdft_energy_pmv = ''
-        #self.mdft_energy_pid = ''
         
     def parse(self, logfile):
         data_log = {}
