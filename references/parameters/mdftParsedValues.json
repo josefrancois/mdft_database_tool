@@ -1,20 +1,41 @@
 {
-    "ENERGY" : {
-        "position" : -1
+    "mdft_energy" : {
+        "label" : "MDFT SFE",
+        "flag" : "ENERGY",
+        "position" : -1,
+        "unit" : "kcal/mol"
         },
-    "Functional at min" : 
-        "position" : -2
+    "mdft_energy_pc" : {
+        "label" : "PC MDFT SFE",
+        "flag" : "PC ",
+        "position" : -2,
+        "unit" : "kcal/mol"
         },
-    "PC " : {
-        "position" : -2
+    "mdft_energy_pc+" : {
+        "label" : "PC+ MDFT SFE",
+        "flag" : "PC+",
+        "position" : -2,
+        "unit" : "kcal/mol"
         },
-    "PC+" : {
-        "position": -2
+    "delta_omega" : {
+        "label" : "Delta Omega",
+        "flag" : "Functional at min",
+        "position" : -2,
+        "unit" : "kcal/mol"
         },
-    "PMV" : {
-        "position" : -2
+    "mdft_energy_pid" : {
+        "label" : "Pid MDFT",
+        "flag" : "Pid",
+        "position" : -2,
+        "unit" : "kcal/mol"
         },
-    "Pid" : {
-        "position" : -2
+     "mdft_energy_pmv" : {
+        "label": "PMV MDFT",
+        "flag" : "PMV",
+        "position" : -2,
+        "unit" : "kcal/mol"
         }
 }
+
+    
+            
