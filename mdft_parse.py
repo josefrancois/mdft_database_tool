@@ -15,7 +15,7 @@ mdft_database = {}
 for solute_dir in solute_dirs:
 	for mdft_file in os.listdir(solute_dir):
 		if mdft_file[-4:] == ".out":
-            print solute_dir
+	                print solute_dir
 			log_file = mdft_file
 			pJson.parseData(json_file, solute_dir)
 			mdft_database[solute_dir] = pLog.parse(solute_dir+'/'+log_file)
