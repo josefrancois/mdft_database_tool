@@ -11,6 +11,7 @@ import argparse
 arg_parser = argparse.ArgumentParser(prog="mdft_db_process.py", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
 arg_parser.add_argument("--json", help = "JSON file to parse", default = "mobley.json")
+arg_parser.add_argument("--mdftdatabase", "-mdftdb", help = "MDFT DataBase to parse", default = None)
 arg_parser.add_argument("--topgro", help = "Folder which contains top and gro files to parse", default = "minitopgro")
 arg_parser.add_argument("--voxelsize", "-dx", help = "Distance between two nodes [unit : angstroms]", type=float, default = 0.5)
 arg_parser.add_argument("--lenbulk", "-lb", help = "Distance between solute and box sides [unit : angstroms]", type=int, default = 10)
@@ -68,9 +69,7 @@ for input_file in input_files:
         writer = mW.MdftWriter(molecule, param_mdft)
         writer.write(input_mdft+input_name)
         os.system("cp ./references/do_files/" + run_writer.getDoFile(mdft_args.server)+ " " + input_mdft+input_name)
-        #os.chdir(input_mdft+input_name)
-        #os.system("./mdft-dev | tee " + input_name +".log")
-        #os.chdir("../..")
+
  
 run_writer.write(mdft_args.server, mdft_args.mdftcommit, input_mdft)      
 
