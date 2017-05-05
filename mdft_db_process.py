@@ -77,6 +77,7 @@ run_writer.write(mdft_args.server, mdft_args.mdftcommit, input_mdft)
 os.system("cp mdft_parse.py " + input_mdft)
 os.system("cp -r mdft_parser "  + input_mdft)
 os.system("cp -r mdft_writer "  + input_mdft)
+os.system("cp -r references " + input_mdft)
 os.system("cp " + json_file + " " + input_mdft)
 
 if mdft_args.mdftpath is not None :
