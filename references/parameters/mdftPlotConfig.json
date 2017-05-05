@@ -1,67 +1,35 @@
 {
-    "list" : {
-        "MDFT vs MD" : {
-            "title" : "Molecular Density Functional Theory vs Molecular Dynamics Simulations",
-            "x" : "calc",
-            "x_label" : "Molecular Dynamics",
-            "y" : "mdft_energy",
-            "y_label" : "MDFT SFE"
-            },
-        "MD vs Exp" : {
-            "title" : "Molecular Dynamics Simulation vs Experiment",
+    "plotvs" : {
+        "vs Experimental" : {
             "x" : "expt",
             "x_label" : "Experimental",
-            "y" : "calc",
-            "y_label" : "Molecular Dynamics"
+            "y" : "calc mdft_energy_pc mdft_energy_pc+"
             },
-        "MDFT vs Exp" : {
-            "title" : "Molecular Density Functional Theory vs Experiment",
+        "vs MD Simulations" : {
+            "x" : "calc",
+            "x_label": "Molecular Dynamics",
+            "y" : "mdft_energy_pc mdft_energy_pc+"
+            }
+        },
+    "errordistrib" : {
+        "vs Experimental" : {
+            "ref" : "expt",
+            "ref_label" : "Experimental",
+            "comp" : "calc mdft_energy_pc mdft_energy_pc+",
+            "name" : "error_distribution_exp"
+            },
+        "vs MD Simulations" : {
+            "ref" : "calc",
+            "ref_label" : "Molecular Dynamics",
+            "comp" : "mdft_energy_pc mdft_energy_pc+",
+            "name" : "error_distribution_calc"
+            }
+        },
+    "errorgroups" : {
+        "vs Experimental" : {
             "x" : "expt",
             "x_label" : "Experimental",
-            "y" : "mdft_energy",
-            "y_label" : "MDFT SFE"
-            },
-        "Delta Omega vs MD" : {
-            "title" : "MDFT Delta Omega vs Molecular Dynamics Simulations",
-            "x" : "calc",
-            "x_label": "Molecular Dynamics",
-            "y" : "delta_omega",
-            "y_label" : "Delta Omega"
-            },
-        "Delta Omega vs Exp" : {
-            "title" : "MDFT Delta Omega vs Experiment",
-            "x" : "expt",
-            "x_label": "Experimental",
-            "y" : "delta_omega",
-            "y_label" : "Delta Omega"
-            },
-        "PC MDFT vs MD" : {
-            "title" : "MDFT with Pressure Correction vs Molecular Dynamics Simulations",
-            "x" : "calc",
-            "x_label": "Molecular Dynamics",
-            "y" : "mdft_energy_pc",
-            "y_label" : "PC MDFT"
-            },
-        "PC MDFT vs Exp" : {
-            "title" : "MDFT with Pressure Correction vs Experiment",
-            "x" : "expt",
-            "x_label": "Experimental",
-            "y" : "mdft_energy_pc",
-            "y_label" : "PC MDFT"
-            },
-        "PC+ MDFT vs MD" : {
-            "title" : "MDFT with Pressure Correction + vs Molecular Dynamics Simulations",
-            "x" : "calc",
-            "x_label": "Molecular Dynamics",
-            "y" : "mdft_energy_pc+",
-            "y_label" : "PC+ MDFT"
-            },
-        "PC+ MDFT vs Exp" : {
-            "title" : "MDFT with Pressure Correction + vs Experiment",
-            "x" : "expt",
-            "x_label": "Experimental",
-            "y" : "mdft_energy_pc+",
-            "y_label" : "PC+ MDFT"
+            "y" : "calc mdft_energy_pc"
             }
         },
     "unit" : "kcal/mol"

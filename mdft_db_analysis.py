@@ -12,41 +12,43 @@ mdft_db = pd.read_json(mdft_args.json, orient='index')
 
 print mdft_db.shape[0], "solutes"
 
-plots_dir = mdft_args.json[:-5]+"_plots"
-os.mkdir(plots_dir)
-
-mdft_plots = {}
+plots_vs = {}
+plots_errdistrib = {}
+plots_errgroups = {}
 unit = ''
-
 with open("references/parameters/mdftPlotConfig.json", 'r') as json_plots:
     plots = json.load(json_plots)
-    mdft_plots = plots['list']
+    plots_vs = plots['plotvs']
+    plots_errdistrib = plots['errordistrib']
+    plots_errgroups = plots['errorgroups']
     unit = plots['unit']
-    
-label_list_expt = []
-label_list_calc = []
 
-mdft_db_diff_expt = pd.DataFrame()
-mdft_db_diff_calc = pd.DataFrame()
 
+values_label = {}    
+with open("references/parameters/mdftParsedValues.json", 'r') as json_values:
+    values = json.load(json_values)
+    for value in values:
+        values_label[value] = values[value]['label']
+
+
+plots_dir = mdft_args.json[:-5]+"_plots"
+os.mkdir(plots_dir)
 plotter = mP.MdftPlotter(mdft_db, plots_dir)
 
-for plot in mdft_plots:
-    plotter.plotVS(mdft_plots[plot]['x'], mdft_plots[plot]['y'], mdft_plots[plot]['x_label'], mdft_plots[plot]['y_label'], unit, mdft_plots[plot]['title'])
-    #plotter.plotEnrichmentCurve(mdft_plots[plot]['x'], mdft_plots[plot]['y'])    
-    diff = mdft_db[mdft_plots[plot]['y']]-mdft_db[mdft_plots[plot]['x']]
-    if mdft_plots[plot]['x'] == 'expt' and mdft_plots[plot]['y'] not in ['mdft_energy', 'delta_omega'] :
-        mdft_db_diff_expt = pd.concat([mdft_db_diff_expt, diff], axis=1)
-        label_list_expt.append(mdft_plots[plot]['y_label']+' - '+mdft_plots[plot]['x_label'])
-    elif mdft_plots[plot]['x'] == 'calc' and mdft_plots[plot]['y'] not in ['mdft_energy', 'delta_omega'] :
-        mdft_db_diff_calc = pd.concat([mdft_db_diff_calc, diff], axis=1)
-        label_list_calc.append(mdft_plots[plot]['y_label']+' - '+mdft_plots[plot]['x_label'])
+
+for plot in plots_vs:
+    for value in plots_vs[plot]['y'].split():
+        if plots_vs[plot]['x_label'] not in values_label:
+            values_label[plots_vs[plot]['x']] = plots_vs[plot]['x_label']
+        plotter.plotVS(plots_vs[plot]['x'], value, plots_vs[plot]['x_label'], values_label[value], unit)
         
-mdft_db_diff_expt.columns = label_list_expt
-mdft_db_diff_calc.columns = label_list_calc
+for plot in plots_errdistrib:
+    values_list = plots_errdistrib[plot]['comp'].split()
+    plotter.plotErrorDistribution(plotter.calcDiffs(plots_errdistrib[plot]['ref'], values_list, plots_errdistrib[plot]["ref_label"], values_label), plots_errdistrib[plot]['name'])
 
-plotter.plotErrorDistribution(mdft_db_diff_expt, "err_distrib_expt")
-plotter.plotErrorDistribution(mdft_db_diff_calc, "err_distrib_calc")
-
+for plot in plots_errgroups:
+    values_list = plots_errgroups[plot]['y'].split()
+    plotter.plotErrorGroups(plotter.calcErrorGroups(plots_errgroups[plot]['x'], values_list, values_label)) 
+    
 os.system("cp " + mdft_args.json + " ./"+plots_dir)
 

@@ -1,10 +1,4 @@
 {
-    "mdft_energy" : {
-        "label" : "MDFT SFE",
-        "flag" : "ENERGY",
-        "position" : -1,
-        "unit" : "kcal/mol"
-        },
     "mdft_energy_pc" : {
         "label" : "PC MDFT SFE",
         "flag" : "PC ",
@@ -13,25 +7,13 @@
         },
     "mdft_energy_pc+" : {
         "label" : "PC+ MDFT SFE",
-        "flag" : "PC+",
-        "position" : -2,
+        "flag" : "ENERGY",
+        "position" : -1,
         "unit" : "kcal/mol"
         },
     "delta_omega" : {
         "label" : "Delta Omega",
         "flag" : "Functional at min",
-        "position" : -2,
-        "unit" : "kcal/mol"
-        },
-    "mdft_energy_pid" : {
-        "label" : "Pid MDFT",
-        "flag" : "Pid",
-        "position" : -2,
-        "unit" : "kcal/mol"
-        },
-     "mdft_energy_pmv" : {
-        "label": "PMV MDFT",
-        "flag" : "PMV",
         "position" : -2,
         "unit" : "kcal/mol"
         }
