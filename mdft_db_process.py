@@ -3,9 +3,11 @@
 
 import os
 import mdft_parser.gromacsParser as gP
+import mdft_parser.mdftdbParser as mdP
 import mdft_parser.parserJson as pJ
 import mdft_writer.mdftWriter as mW
 import mdft_writer.runAllWriter as rAW
+import json
 import argparse
 
 arg_parser = argparse.ArgumentParser(prog="mdft_db_process.py", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -30,6 +32,7 @@ mdft_args = arg_parser.parse_args()
 topgro_files = mdft_args.topgro+"/"
 json_file = mdft_args.json
 
+
 if mdft_args.bridge == 'none' :
     input_mdft = "input_mdft/"
 else:
@@ -48,28 +51,40 @@ param_mdft = {'lb':mdft_args.lenbulk, 'dx':mdft_args.voxelsize, 'solvent':mdft_a
 
 run_writer = rAW.runAllWriter() 
 
-for input_file in input_files:    
-    input_name = input_file[:-4]
+if mdft_args.mdftdatabase is None:
+    for input_file in input_files:    
+        input_name = input_file[:-4]
+        
+        if os.path.exists(input_mdft+input_name):
+            #print input_name
+            pass
+        else:
+            os.mkdir(input_mdft + input_name)
+            print input_name       
+            parser = gP.GromacsParser(topgro_files+input_name + ".gro", topgro_files+input_name + ".top")
+            molecule = parser.parse()
+                                                        
+            fjson = pJ.ParserJson()
+            fjson.parseData(json_file, input_name)
+            molecule.setData(fjson.getData() )
+            molecule.setName(fjson.getRecordName() )
+            #print molecule.getData
+                                                                                  
+            writer = mW.MdftWriter(molecule, param_mdft)
+            writer.write(input_mdft+input_name)
+            os.system("cp ./references/do_files/" + run_writer.getDoFile(mdft_args.server)+ " " + input_mdft+input_name)
+else:
+    with open(mdft_args.mdftdatabase, 'r') as fjson:
+        mdft_database = json.load(fjson)
     
-    if os.path.exists(input_mdft+input_name):
-        #print input_name
-        pass
-    else:
-        os.mkdir(input_mdft + input_name)
-        print input_name       
-        parser = gP.GromacsParser(topgro_files+input_name + ".gro", topgro_files+input_name + ".top")
-        molecule = parser.parse()
-                                                    
-        fjson = pJ.ParserJson()
-        fjson.parseData(json_file, input_name)
-        molecule.setData(fjson.getData() )
-        molecule.setName(fjson.getRecordName() )
-        #print molecule.getData
-                                                                              
+    for mol in mdft_database:    
+        parser = mdP.MdftDBParser(mdft_database)
+        molecule = parser.parse(mol)
+        molecule.setName(mol)
+        os.mkdir(input_mdft+molecule.getName())
         writer = mW.MdftWriter(molecule, param_mdft)
-        writer.write(input_mdft+input_name)
-        os.system("cp ./references/do_files/" + run_writer.getDoFile(mdft_args.server)+ " " + input_mdft+input_name)
-
+        writer.write(input_mdft+molecule.getName())
+        os.system("cp ./references/do_files/" + run_writer.getDoFile(mdft_args.server)+ " " + input_mdft+molecule.getName())
  
 run_writer.write(mdft_args.server, mdft_args.mdftcommit, input_mdft)      
 
