@@ -20,8 +20,8 @@ class MdftDBParser:
                           self.mdft_db[mol][at]['atomtype'],\
                           {'x':self.mdft_db[mol][at]['x'], 'y':self.mdft_db[mol][at]['y'], 'z':self.mdft_db[mol][at]['z']},\
                           self.mdft_db[mol][at]['charge'],\
-                          dict_atypes[self.mdft_db[mol][at]['atomtype']]['epsilon'],\
-                          dict_atypes[self.mdft_db[mol][at]['atomtype']]['sigma'],\
+                          self.mdft_db[mol][at]['epsilon'],\
+                          self.mdft_db[mol][at]['sigma'],\
                           self.mdft_db[mol][at]['Zatomic'])
             molecule.addAtom(atome)
             

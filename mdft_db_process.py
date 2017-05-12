@@ -1,4 +1,7 @@
 """
+Project : MDFT Database Tool
+
+Author : Jose Francois
 """
 
 import os
