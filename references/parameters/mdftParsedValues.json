@@ -1,12 +1,12 @@
 {
     "mdft_energy_pc" : {
-        "label" : "PC MDFT SFE",
+        "label" : "PC MDFT",
         "flag" : "PC ",
         "position" : -2,
         "unit" : "kcal/mol"
         },
     "mdft_energy_pc+" : {
-        "label" : "PC+ MDFT SFE",
+        "label" : "PC+ MDFT",
         "flag" : "ENERGY",
         "position" : -1,
         "unit" : "kcal/mol"
