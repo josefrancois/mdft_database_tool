@@ -25,11 +25,17 @@ class Atom:
     def setCharge(self, charge):
         self.charge = charge
         
-    def setEpsilon(self, dict_epsilon):
-        self.epsilon = dict_epsilon[self.atomtype]
+    def setEpsilon(self, epsilon):
+        if type(epsilon) is dict:
+            self.epsilon = epsilon[self.atomtype]
+        elif type(epsilon) is float:
+            self.epsilon = epsilon
     
-    def setSigma(self, dict_sigma):
-        self.sigma = dict_sigma[self.atomtype]
+    def setSigma(self, sigma):
+        if type(sigma) is dict:
+            self.sigma = sigma[self.atomtype]
+        elif type(sigma) is float:
+            self.sigma = sigma
     
     def setNumatm(self, numatm):
         self.numatm = numatm
