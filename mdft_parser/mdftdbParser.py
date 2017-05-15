@@ -10,14 +10,11 @@ class MdftDBParser:
         
         
     def parse(self, mol):
-        with open('mdft_atomtypes.json', 'r') as json_atypes:
-            dict_atypes = json.load(json_atypes)
-            
         molecule = Molecule()
         for at in self.mdft_db[mol]:
             atome = Atom(self.mdft_db[mol][at]['name'],\
                           self.mdft_db[mol][at]['index'],\
-                          self.mdft_db[mol][at]['atomtype'],\
+                          None,\
                           {'x':self.mdft_db[mol][at]['x'], 'y':self.mdft_db[mol][at]['y'], 'z':self.mdft_db[mol][at]['z']},\
                           self.mdft_db[mol][at]['charge'],\
                           self.mdft_db[mol][at]['epsilon'],\

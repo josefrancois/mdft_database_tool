@@ -1,0 +1,48 @@
+{
+    "mobley" : {
+        "format" : "gromacs",
+        "file" : "topgro",
+        "columns_to_parse" : {
+            "calc" : {
+                "label" : "MD Simulations"
+            },
+            "expt" : {
+                "label" : "Experimental"
+            }
+        },
+        "plots" : {
+            "plotvs" : {
+                "vs Experimental" : {
+                    "x" : "expt",
+                    "y" : "calc mdft_energy_pc mdft_energy_pc+"
+                },
+                "vs MD Simulations" : {
+                    "x" : "calc",
+                    "y" : "mdft_energy_pc mdft_energy_pc+"
+                }
+            },
+            "errordistrib" : {
+                "vs Experimental" : {
+                    "ref" : "expt",
+                    "comp" : "calc mdft_energy_pc mdft_energy_pc+",
+                    "name" : "error_distribution_exp"
+                },
+                "vs MD Simulations" : {
+                    "ref" : "calc",
+                    "comp" : "mdft_energy_pc mdft_energy_pc+",
+                    "name" : "error_distribution_calc"
+                }
+            },
+            "errorby" : {
+                "vs Experimental" : {
+                    "x" : "expt",
+                    "y" : "calc mdft_energy_pc"
+                    }
+            }
+        }
+    },
+    "analogs" : {
+        "format" : "json",
+        "file" : "analog_mdft_db.json"
+    }        
+}
