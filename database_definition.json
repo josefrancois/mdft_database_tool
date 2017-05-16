@@ -2,7 +2,8 @@
     "mobley" : {
         "format" : "gromacs",
         "file" : "topgro",
-        "columns_to_parse" : {
+        "mdft_output": "mdft_mmax1_ref.json",
+        "values_to_parse" : {
             "calc" : {
                 "label" : "MD Simulations"
             },
@@ -23,22 +24,24 @@
             },
             "errordistrib" : {
                 "vs Experimental" : {
-                    "ref" : "expt",
-                    "comp" : "calc mdft_energy_pc mdft_energy_pc+",
+                    "x" : "expt",
+                    "y" : "calc mdft_energy_pc mdft_energy_pc+",
                     "name" : "error_distribution_exp"
                 },
                 "vs MD Simulations" : {
-                    "ref" : "calc",
-                    "comp" : "mdft_energy_pc mdft_energy_pc+",
+                    "x" : "calc",
+                    "y" : "mdft_energy_pc mdft_energy_pc+",
                     "name" : "error_distribution_calc"
                 }
             },
             "errorby" : {
                 "vs Experimental" : {
                     "x" : "expt",
-                    "y" : "calc mdft_energy_pc"
-                    }
-            }
+                    "y" : "calc mdft_energy_pc",
+                    "cat_column" : "groups"
+                }
+            },
+            "unit" : "kcal/mol"
         }
     },
     "analogs" : {
