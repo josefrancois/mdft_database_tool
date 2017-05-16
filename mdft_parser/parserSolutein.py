@@ -29,7 +29,6 @@ class SoluteinParser:
                      self.list_y.append(float(line.split()[5]))
                      self.list_z.append(float(line.split()[6]))
                      self.list_numatom.append(line.split()[7])
-                     self.list_atomtype.append(line.split()[8])
     
     def getName(self):
         return self.name
