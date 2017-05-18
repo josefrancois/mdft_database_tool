@@ -2,8 +2,11 @@ import os
 import mdft_parser.parserJson as pJ
 import mdft_parser.parserLog as pL
 import mdft_writer.jsonWriter as jW
+import argparse
 
-json_file = "mobley.json"
+arg_parser = argparse.ArgumentParser(prog="mdft_parse.py", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+arg_parser.add_argument("--database","-db", help = "Database to parse", default = None)
+mdft_args = arg_parser.parse_args()
 
 pJson = pJ.ParserJson()
 pLog = pL.ParserLog()
@@ -15,13 +18,16 @@ mdft_database = {}
 for solute_dir in solute_dirs:
 	for mdft_file in os.listdir(solute_dir):
 		if mdft_file[-4:] == ".out":
-            pJson.parseData(json_file, solute_dir)
-            mdft_database = pJson.getData()
-	                print solute_dir
-			log_file = mdft_file
-			pJson.parseData(json_file, solute_dir)
-			mdft_database[solute_dir] = pLog.parse(solute_dir+'/'+log_file)
-			
+		    log_file = mdft_file
+		    mdft_values = pLog.parse(solute_dir+'/'+log_file)
+		    if mdft_args.database != None:
+		    	pJson.parseData(mdft_args.database, solute_dir)
+		    	mdft_database[solute_dir] = pJson.getData()
+		    	for mdft_value in mdft_values:
+				    mdft_database[solute_dir][mdft_value] = mdft_values[mdft_value]
+		    else:
+			    mdft_database[solute_dir] = mdft_values
+		    print solute_dir
 
 newJson = jW.JsonWriter(mdft_database)
 newJson.write('mdft.json')

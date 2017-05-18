@@ -19,4 +19,4 @@ class ParserLog:
 		                ### All quantities in kcal/mol
                         data_log[mdft_value] = converter.kjTokcal(float(line.split()[self.mdft_values[mdft_value]['position']]))
         	
-	return data_log
+	    return data_log
