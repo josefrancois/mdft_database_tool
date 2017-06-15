@@ -18,7 +18,7 @@ with open("database_definition.json", 'r') as json_file:
     plots = db_def[mdft_args.mdft_database]['plots']
     plots_vs = plots['plotvs']
     plots_errdistrib = plots['errordistrib']
-    plots_errby = plots['errorby']
+    plots_by = plots['plotsby']
     unit = plots['unit']
     
 #mdft_db = pd.read_json(mdft_args.json, orient='index')
@@ -46,10 +46,11 @@ for plot in plots_vs:
         
 for plot in plots_errdistrib:
     values_list = plots_errdistrib[plot]['y'].split()
-    plotter.plotErrorDistribution(plotter.calcDiffs(plots_errdistrib[plot]['x'], values_list, values_label[plots_errdistrib[plot]['x']], values_label), plots_errdistrib[plot]['name'])
+    plotter.plotErrorDistribution(plotter.calcDiffs(plots_errdistrib[plot]['x'], values_list, values_label[plots_errdistrib[plot]['x']], values_label), plots_errdistrib[plot]['filename'])
 
-for plot in plots_errby:
-    values_list = plots_errby[plot]['y'].split()
-    plotter.plotErrorby(plotter.calcErrorby(plots_errby[plot]['x'], values_list, values_label, plots_errby[plot]['cat_column']), plots_errby[plot]['cat_column']) 
+for plot in plots_by:
+    values_list = plots_by[plot]['y'].split()
+    plotter.plotErrorby(plotter.calcErrorby(plots_by[plot]['x'], values_list, values_label, plots_by[plot]['cat_column']), plots_by[plot]['cat_column']) 
+    plotter.plotPbiasby(plotter.calcPbiasby(plots_by[plot]['x'], values_list, values_label, plots_by[plot]['cat_column']), plots_by[plot]['cat_column'])
     
 os.system("cp " + mdft_json + " ./"+plots_dir)
