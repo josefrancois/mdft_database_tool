@@ -11,10 +11,10 @@ class ParserGro:
         converter = cv.Converter() # => in order to convert from nm to angstrom for MDFT
         with open(fgro, 'r') as gro:  
             for line in gro:
-                if line.find("MOL") != -1:
-                    self.list_x.append(converter.nmToangstrom(float(line.split()[4])))
-                    self.list_y.append(converter.nmToangstrom(float(line.split()[5])))
-                    self.list_z.append(converter.nmToangstrom(float(line.split()[6])))
+                if line.find(" MOL ") != -1:
+                    self.list_x.append(converter.nmToangstrom(float(line.split()[-3])))
+                    self.list_y.append(converter.nmToangstrom(float(line.split()[-2])))
+                    self.list_z.append(converter.nmToangstrom(float(line.split()[-1])))
                     
     def getListx(self):
         return self.list_x

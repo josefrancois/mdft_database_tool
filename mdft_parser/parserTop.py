@@ -15,7 +15,7 @@ class ParserTop:
         with open(ftop, 'r') as top: 
             converter = cv.Converter()        
             for line in top:
-                if line.find('MOL') != -1:
+                if line.find('  MOL  ') != -1:
                     self.list_name.append(line.split()[4])
                     self.list_num.append(line.split()[0])
                     self.list_atomtype.append(line.split()[1])
