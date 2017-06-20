@@ -18,7 +18,7 @@ arg_parser.add_argument("--database", "-db", help = "Database to parse", default
 arg_parser.add_argument("--voxelsize", "-dx", help = "Distance between two nodes [unit : angstroms]", type=float, default = 0.5)
 arg_parser.add_argument("--lenbulk", "-lb", help = "Distance between solute and box sides [unit : angstroms]", type=int, default = 10)
 arg_parser.add_argument("--solvent", help = "Solvent to use in MDFT")
-arg_parser.add_argument("--mmax", help = "Maximum number of orientations of solvent molecules to consider", type=int, default = 1)
+arg_parser.add_argument("--mmax", help = "Maximum number of orientations of solvent molecules to consider", type=int, default = 3)
 arg_parser.add_argument("--temperature","-T", help = "Temperature to use in MDFT [unit : Celsius degree]", type=float, default = 298.15)
 arg_parser.add_argument("--server", "-sv", help = "Server machine in which MDFT calculations would be performed", default = "abalone")
 arg_parser.add_argument("--mdftcommit", help = "Commit hash of mdft-dev that should be used", default = None)
@@ -58,6 +58,7 @@ elif db_format == 'json':
 run_writer = rAW.runAllWriter()
 
 for mol in input_db:
+    print mol
     molecule = parser.parse(mol)
     molecule.setName(mol)
     os.mkdir(input_mdft+molecule.getName())
