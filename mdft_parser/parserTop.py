@@ -25,8 +25,7 @@ class ParserTop:
                         self.list_num.append(line.split()[0])
                         self.list_atomtype.append(line.split()[1])
                         self.list_charge.append(float(line.split()[6]))
-                        self.list_numatom.append(int(round(float(line.split()[7])/2)))
-                        
+                        self.list_numatom.append(int(round(float(line.split()[7])/2)))     
                 elif ind > lines.index('[ atomtypes ]\n') and ind < lines.index('[ moleculetype ]\n'):
                     #print line
                     if len(line) < 2 or line[0] == ';': #avoid commentaries and blank line
