@@ -12,18 +12,28 @@ class ParserTop:
         self.list_epsilon = {}
         
     def parseAtoms(self, ftop):
-        with open(ftop, 'r') as top: 
-            converter = cv.Converter()        
-            for line in top:
-                if line.find('  MOL  ') != -1:
-                    self.list_name.append(line.split()[4])
-                    self.list_num.append(line.split()[0])
-                    self.list_atomtype.append(line.split()[1])
-                    self.list_charge.append(float(line.split()[6]))
-                    self.list_numatom.append(int(round(float(line.split()[7])/2)))
-                elif line.find('  A  ') != -1:
-                    self.list_sigma[line.split()[0]] = converter.nmToangstrom(float(line.split()[5]))
-                    self.list_epsilon[line.split()[0]] = float(line.split()[6])
+        with open(ftop, 'r') as top:
+            lines = top.readlines() 
+            converter = cv.Converter()
+            #print lines        
+            for ind, line in enumerate(lines):
+                if ind > lines.index('[ atoms ]\n') and ind < lines.index('[ bonds ]\n'):
+                    if len(line) < 2 or line[0] == ';': #avoid commentaries and blank line
+                        continue
+                    else:
+                        self.list_name.append(line.split()[4])
+                        self.list_num.append(line.split()[0])
+                        self.list_atomtype.append(line.split()[1])
+                        self.list_charge.append(float(line.split()[6]))
+                        self.list_numatom.append(int(round(float(line.split()[7])/2)))
+                        
+                elif ind > lines.index('[ atomtypes ]\n') and ind < lines.index('[ moleculetype ]\n'):
+                    #print line
+                    if len(line) < 2 or line[0] == ';': #avoid commentaries and blank line
+                        continue
+                    else :
+                        self.list_sigma[line[0:10].strip()] = converter.nmToangstrom(float(line[42:59].strip()))
+                        self.list_epsilon[line[0:10].strip()] = float(line[59:73].strip())
                     
     def getNumberOfAtoms(self):
         return len(self.list_name)
