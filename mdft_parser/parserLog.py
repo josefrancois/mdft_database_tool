@@ -2,6 +2,7 @@
 
 import json
 import converter as cv
+import math as m
 
 class ParserLog:
     "Definition of a MDFT output files parser"
@@ -12,11 +13,13 @@ class ParserLog:
     def parse(self, logfile):
         data_log = {}
         converter = cv.Converter()
-	    with open(logfile, 'r') as flog :
+	with open(logfile, 'r') as flog :
             for line in flog:
                 for mdft_value in self.mdft_values:	
-                    if self.mdft_values[mdft_value]['flag'].encode('ascii', 'ignore') in line: #To avoid any decoding error from 'mdftParsedValues.json' file reading	
+                    if self.mdft_values[mdft_value]['flag'].encode('ascii', 'ignore') in line and \ #To avoid any decoding error from 'mdftParsedValues.json' file reading
+                       m.isnan(float(line.split()[self.mdft_values[mdft_value]['position']]))==False: #To avoid all 'NaN' results
 		                ### All quantities in kcal/mol
                         data_log[mdft_value] = converter.kjTokcal(float(line.split()[self.mdft_values[mdft_value]['position']]))
+			
         	
 	    return data_log
