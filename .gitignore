@@ -12,3 +12,4 @@ input_mdft.tar.gz
 *.png
 *.pdf
 input_mdft_mmax1_ref
+cloneDB.sh
