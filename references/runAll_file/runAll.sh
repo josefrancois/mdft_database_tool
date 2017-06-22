@@ -10,7 +10,7 @@ if [ ! -d "mdft-dev" ]; then
 fi
 
 for folder in *; do
-	if [ -d $folder -a $folder != "mdft-dev" -a $folder != "mdft_parser" -a $folder != "mdft_writer" ]; then
+	if [ -d $folder -a $folder != "mdft-dev" -a $folder != "mdft_parser" -a $folder != "mdft_writer" -a $folder != "references" ]; then
 	    cp mdft-dev/build/mdft-dev $folder
 	    cp -r mdft-dev/build/data $folder
 	    cd $folder
