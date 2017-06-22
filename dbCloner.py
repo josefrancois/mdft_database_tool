@@ -10,10 +10,10 @@ class DBCloner:
             clone_file.write("git clone " + self.github_url + '\n')
             arch_ext = ['.zip', '.tar.gz']
             if any(ext in self.directory for ext in arch_ext):
-                clone_file.write("tar -xzvf $( ls -td -- ../mdft_project_clean/*/ | head -n 1 )/" + self.directory)
+                clone_file.write("tar -xzvf $( ls -td -- $( pwd )/*/ | head -n 1 )/" + self.directory)
                 return self.directory[:self.directory.find(arch_ext[[ext in self.directory for ext in arch_ext].index(True)])]
             else:
-                clone_file.write("cp $( ls -td -- ../mdft_project_clean/*/ | head -n 1 )/" + self.directory + " .")
+                clone_file.write("cp $( ls -td -- $( pwd )/*/ | head -n 1 )/" + self.directory + " .")
                 return self.directory 
             
     def execute(self):
