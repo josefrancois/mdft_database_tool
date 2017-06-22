@@ -32,6 +32,8 @@ class MdftWriter:
 
         dftin.setBridge(self.parameters['bridge'])
         
-        dftin.setSCSF(self.parameters['solute_charges_scale_factor'])  
+        dftin.setSCSF(self.parameters['solute_charges_scale_factor'])
+        
+        dftin.setDSS(self.parameters['direct_solute_sigmak'])  
                 
         dftin.write(folder)
