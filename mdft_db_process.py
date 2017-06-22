@@ -6,7 +6,7 @@ Author : Jose Francois
 
 import os
 import mdft_parser.gromacsParser as gP
-import mdft_parser.mdftdbParser as mdP
+import mdft_parser.jsondbParser as jdP
 import mdft_writer.mdftWriter as mW
 import mdft_writer.runAllWriter as rAW
 import dbCloner as dbC
@@ -63,7 +63,7 @@ if db_format == 'gromacs':
 elif db_format == 'json':
     with open(input_name["mol_db"], 'r') as fjson:
         input_db = json.load(fjson)
-    parser = mdP.MdftDBParser(input_db)
+    parser = jdP.JsonDBParser(input_db)
     
     
 run_writer = rAW.runAllWriter()
