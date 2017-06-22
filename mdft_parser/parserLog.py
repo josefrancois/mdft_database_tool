@@ -15,9 +15,9 @@ class ParserLog:
         converter = cv.Converter()
 	with open(logfile, 'r') as flog :
             for line in flog:
-                for mdft_value in self.mdft_values:	
-                    if self.mdft_values[mdft_value]['flag'].encode('ascii', 'ignore') in line and \ #To avoid any decoding error from 'mdftParsedValues.json' file reading
-                       m.isnan(float(line.split()[self.mdft_values[mdft_value]['position']]))==False: #To avoid all 'NaN' results
+                for mdft_value in self.mdft_values:
+                    #To avoid all 'NaN' results and to avoid any decoding error from 'mdftParsedValues.json' file reading	
+                    if self.mdft_values[mdft_value]['flag'].encode('ascii', 'ignore') in line and m.isnan(float(line.split()[self.mdft_values[mdft_value]['position']]))==False:         
 		                ### All quantities in kcal/mol
                         data_log[mdft_value] = converter.kjTokcal(float(line.split()[self.mdft_values[mdft_value]['position']]))
 			
