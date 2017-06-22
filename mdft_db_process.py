@@ -9,6 +9,7 @@ import mdft_parser.gromacsParser as gP
 import mdft_parser.mdftdbParser as mdP
 import mdft_writer.mdftWriter as mW
 import mdft_writer.runAllWriter as rAW
+import dbCloner as dbC
 import json
 import argparse
 
@@ -18,7 +19,7 @@ arg_parser.add_argument("--database", "-db", help = "Database to parse", default
 arg_parser.add_argument("--voxelsize", "-dx", help = "Distance between two nodes [unit : angstroms]", type=float, default = 0.5)
 arg_parser.add_argument("--lenbulk", "-lb", help = "Distance between solute and box sides [unit : angstroms]", type=int, default = 10)
 arg_parser.add_argument("--solvent", help = "Solvent to use in MDFT")
-arg_parser.add_argument("--mmax", help = "Maximum number of orientations of solvent molecules to consider", type=int, default = 3)
+arg_parser.add_argument("--mmax", help = "Maximum number of orientations of solvent molecules to consider", type=int, default = 1)
 arg_parser.add_argument("--temperature","-T", help = "Temperature to use in MDFT [unit : Celsius degree]", type=float, default = 298.15)
 arg_parser.add_argument("--server", "-sv", help = "Server machine in which MDFT calculations would be performed", default = "abalone")
 arg_parser.add_argument("--mdftcommit", help = "Commit hash of mdft-dev that should be used", default = None)
@@ -46,13 +47,21 @@ param_mdft = {'lb':mdft_args.lenbulk, 'dx':mdft_args.voxelsize, 'solvent':mdft_a
 
 with open('database_definition.json', 'r') as json_file:
     db_def = json.load(json_file)
-db_format = db_def[mdft_args.database]["format"] 
+input_name = db_def[mdft_args.database]
+db_format = input_name["format"] 
 parser = None
+input_db_name = None
 if db_format == 'gromacs':
-    parser = gP.GromacsParser(db_def[mdft_args.database]["file"])
-    input_db = list(set([f[:-4] for f in os.listdir(db_def[mdft_args.database]["file"])]))
+    if "github" in input_name:
+        cloner = dbC.DBCloner(input_name["github"], input_name["mol_db"])
+        input_db_name = cloner.write()
+        cloner.execute()
+    else:
+        input_db_name = input_name["mol_db"]   
+    parser = gP.GromacsParser(input_db_name)    
+    input_db = list(set([f[:-4] for f in os.listdir(input_db_name) if ".gro" in f]))
 elif db_format == 'json':
-    with open(db_def[mdft_args.database]["file"], 'r') as fjson:
+    with open(input_name["mol_db"], 'r') as fjson:
         input_db = json.load(fjson)
     parser = mdP.MdftDBParser(input_db)
     
@@ -72,6 +81,7 @@ run_writer.write(mdft_args.server, mdft_args.mdftcommit, input_mdft)
   
 
 os.system("cp mdft_parse.py " + input_mdft)
+os.system("cp database_definition.json " + input_mdft)
 os.system("cp -r mdft_parser "  + input_mdft)
 os.system("cp -r mdft_writer "  + input_mdft)
 os.system("cp -r references " + input_mdft)
