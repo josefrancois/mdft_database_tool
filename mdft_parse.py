@@ -26,7 +26,7 @@ for solute_dir in solute_dirs:
     mdft_values = pLog.parse(log_file)
     #print len(mdft_values),
     if len(mdft_values) != 0: #Avoid solutes for which no MDFT results are retrieved
-    	if mdft_args.database != None: #If reference values of SFE are provided, MDFT values are merged with them  	    
+    	if mdft_args.database != None and "ref_values" in db_def[mdft_args.database]: #If reference values of SFE are provided, MDFT values are merged with them  	    
             input_name = db_def[mdft_args.database]
             ref_values = input_name["ref_values"] 
     	    pJson.parseData(ref_values, solute_dir)
@@ -39,7 +39,7 @@ for solute_dir in solute_dirs:
 	    continue
 
 newJson = jW.JsonWriter(mdft_database)
-if mdft_args.database != None:
+if mdft_args.database != None and "ref_values" in db_def[mdft_args.database]:
     newJson.write(db_def[mdft_args.database]['mdft_output'])
 else:
     newJson.write('mdft.json')
