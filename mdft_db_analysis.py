@@ -15,10 +15,7 @@ with open("database_definition.json", 'r') as json_file:
     db_values = db_def[mdft_args.mdft_database]['values_to_parse']
     mdft_json = db_def[mdft_args.mdft_database]["mdft_output"]
     mdft_db = pd.read_json(mdft_json, orient='index')
-    plots = db_def[mdft_args.mdft_database]['plots']
-    plots_vs = plots['plotvs']
-    plots_errdistrib = plots['errordistrib']
-    plots_by = plots['plotsby']
+    plots = db_def[mdft_args.mdft_database]['plots']  
     unit = plots['unit']
     
 #mdft_db = pd.read_json(mdft_args.json, orient='index')
@@ -39,18 +36,23 @@ plots_dir = mdft_json[:-5]+"_plots"
 os.mkdir(plots_dir)
 plotter = mP.MdftPlotter(mdft_db, plots_dir)
 
+if "plotsvs" in plots:
+    plots_vs = plots['plotsvs'] 
+    for plot in plots_vs:
+        for value in plots_vs[plot]['y'].split():
+            plotter.plotVS(plots_vs[plot]['x'], value, values_label[plots_vs[plot]['x']], values_label[value], unit)
+            
+if "plotserrdistrib" in plots :
+    plots_errdistrib = plots['plotserrdistrib']     
+    for plot in plots_errdistrib:
+        values_list = plots_errdistrib[plot]['y'].split()
+        plotter.plotErrorDistribution(plotter.calcDiffs(plots_errdistrib[plot]['x'], values_list, values_label[plots_errdistrib[plot]['x']], values_label), plots_errdistrib[plot]['filename'])
 
-for plot in plots_vs:
-    for value in plots_vs[plot]['y'].split():
-        plotter.plotVS(plots_vs[plot]['x'], value, values_label[plots_vs[plot]['x']], values_label[value], unit)
-        
-for plot in plots_errdistrib:
-    values_list = plots_errdistrib[plot]['y'].split()
-    plotter.plotErrorDistribution(plotter.calcDiffs(plots_errdistrib[plot]['x'], values_list, values_label[plots_errdistrib[plot]['x']], values_label), plots_errdistrib[plot]['filename'])
-
-for plot in plots_by:
-    values_list = plots_by[plot]['y'].split()
-    plotter.plotErrorby(plotter.calcErrorby(plots_by[plot]['x'], values_list, values_label, plots_by[plot]['cat_column']), plots_by[plot]['cat_column']) 
-    plotter.plotPbiasby(plotter.calcPbiasby(plots_by[plot]['x'], values_list, values_label, plots_by[plot]['cat_column']), plots_by[plot]['cat_column'])
+if "plotsby" in plots:
+    for plot in plots_by:
+        plots_by = plots['plotsby']
+        values_list = plots_by[plot]['y'].split()
+        plotter.plotErrorby(plotter.calcErrorby(plots_by[plot]['x'], values_list, values_label, plots_by[plot]['cat_column']), plots_by[plot]['cat_column']) 
+        plotter.plotPbiasby(plotter.calcPbiasby(plots_by[plot]['x'], values_list, values_label, plots_by[plot]['cat_column']), plots_by[plot]['cat_column'])
     
 os.system("cp " + mdft_json + " ./"+plots_dir)
