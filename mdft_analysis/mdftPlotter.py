@@ -31,7 +31,8 @@ class MdftPlotter:
         #plt.title(title+" with {0} solutes".format(self.database.shape[0]), fontsize=8)
         plt.xlabel("$\mathrm{\mathsf{\Delta G^{"+x_label+"}_{solv}}}$" + " ({0})".format(unit), fontsize=16)
         plt.ylabel("$\mathrm{\mathsf{\Delta G^{"+y_label+"}_{solv}}}$" + " ({0})".format(unit), fontsize=16)
-        #plt.annotate(s='mobley_5857', xy = (self.database.loc['mobley_5857'][x_column], self.database.loc['mobley_5857'][y_column]), xytext=(3, 1.5), arrowprops=dict(facecolor='black', shrink=0.05))
+        #for mol in self.database.index:
+        #    plt.annotate(s=mol, xy = (self.database.loc[mol][x_column], self.database.loc[mol][y_column]), xytext=(self.database.loc[mol][x_column]+2, self.database.loc[mol][y_column]-1))
         
         pbias = 0
         for i in range(self.database.shape[0]):
