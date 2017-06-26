@@ -49,8 +49,8 @@ if "plotserrdistrib" in plots :
         plotter.plotErrorDistribution(plotter.calcDiffs(plots_errdistrib[plot]['x'], values_list, values_label[plots_errdistrib[plot]['x']], values_label), plots_errdistrib[plot]['filename'])
 
 if "plotsby" in plots:
-    for plot in plots_by:
-        plots_by = plots['plotsby']
+    plots_by = plots['plotsby']
+    for plot in plots_by:       
         values_list = plots_by[plot]['y'].split()
         plotter.plotErrorby(plotter.calcErrorby(plots_by[plot]['x'], values_list, values_label, plots_by[plot]['cat_column']), plots_by[plot]['cat_column']) 
         plotter.plotPbiasby(plotter.calcPbiasby(plots_by[plot]['x'], values_list, values_label, plots_by[plot]['cat_column']), plots_by[plot]['cat_column'])
