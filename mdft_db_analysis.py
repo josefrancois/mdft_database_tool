@@ -39,19 +39,19 @@ plotter = mP.MdftPlotter(mdft_db, plots_dir)
 if "plotsvs" in plots:
     plots_vs = plots['plotsvs'] 
     for plot in plots_vs:
-        for value in plots_vs[plot]['y'].split():
+        for value in plots_vs[plot]['y']:
             plotter.plotVS(plots_vs[plot]['x'], value, values_label[plots_vs[plot]['x']], values_label[value], unit)
             
 if "plotserrdistrib" in plots :
     plots_errdistrib = plots['plotserrdistrib']     
     for plot in plots_errdistrib:
-        values_list = plots_errdistrib[plot]['y'].split()
+        values_list = plots_errdistrib[plot]['y']
         plotter.plotErrorDistribution(plotter.calcDiffs(plots_errdistrib[plot]['x'], values_list, values_label[plots_errdistrib[plot]['x']], values_label), plots_errdistrib[plot]['filename'])
 
 if "plotsby" in plots:
     plots_by = plots['plotsby']
     for plot in plots_by:       
-        values_list = plots_by[plot]['y'].split()
+        values_list = plots_by[plot]['y']
         plotter.plotErrorby(plotter.calcErrorby(plots_by[plot]['x'], values_list, values_label, plots_by[plot]['cat_column']), plots_by[plot]['cat_column']) 
         plotter.plotPbiasby(plotter.calcPbiasby(plots_by[plot]['x'], values_list, values_label, plots_by[plot]['cat_column']), plots_by[plot]['cat_column'])
     
