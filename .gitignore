@@ -13,3 +13,4 @@ input_mdft.tar.gz
 *.pdf
 input_mdft_mmax1_ref
 cloneDB.sh
+mdft_analysis/mdftPlotter_*
