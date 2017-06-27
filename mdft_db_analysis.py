@@ -55,6 +55,5 @@ if "plotsby" in plots:
     for plot in plots_by:       
         values_list = plots_by[plot]['y']
         plotter.plotErrorby(plotter.calcErrorby(plots_by[plot]['x'], values_list, values_label, plots_by[plot]['cat_column']), plots_by[plot]['cat_column']) 
-        plotter.plotPbiasby(plotter.calcPbiasby(plots_by[plot]['x'], values_list, values_label, plots_by[plot]['cat_column']), plots_by[plot]['cat_column'])
     
 os.system("cp " + mdft_json + " ./"+plots_dir)
