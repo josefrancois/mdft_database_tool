@@ -1,5 +1,7 @@
 # MDFT Database Tool : an efficient wrapper around MDFT code
 ## Background
+**Molecular Density Functional Theory (MDFT)** is a solvation model associated to a high-performing code, **MDFT code**, proposed by Daniel Borgis from La Maison De La Simulation and Maximilien Levesque from L'Ecole Normale Supérieure to compute fast and accurate solvation free energies.\
+This work provides an easy-to-use and efficient computational tool enabling to run MDFT code on large databases and providing in-depth comparative analysis to evaluate the performance of MDFT on a large chemical space in a reliable and reproducible way.
 ## Requirements
 This project is only compatible with Linux. It has been written in [Python](https://www.python.org/) 2.7 which is required to use the project. \
 It can be easily installed on Linux, if not, by using apt : `sudo apt install python2.7`\
@@ -113,4 +115,4 @@ If the key for the database is indicated and the file for the reference values i
 Command : **`python mdft_db_analysis.py -database db_key`**\
 Here, the database option is mandatory. This step creates a folder with all the needed plots (in png format) taking into account the parameters indicated in `database_definition.json`.
 
-The help of the commands are available using the **`-h`** option 
+The help of the commands and all their possible options are available using the **`-h`** option 
