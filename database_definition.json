@@ -1,51 +1,36 @@
 {
-    "mobley" : {
-        "format" : "gromacs",
-        "file" : "topgro",
-        "mdft_output": "mdft_mmax1_ref.json",
+    "database" : {                          
+        "mol_db" : "", 
+        "format" : "",
+        "github" : "",
+        "ref_values" : "",
+        "mdft_output": "",
         "values_to_parse" : {
-            "calc" : {
-                "label" : "MD Simulations"
+            "value" : {
+                "label" : ""
             },
-            "expt" : {
-                "label" : "Experimental"
-            }
-        },
         "plots" : {
-            "plotvs" : {
-                "vs Experimental" : {
-                    "x" : "expt",
-                    "y" : "calc mdft_energy_pc mdft_energy_pc+"
-                },
-                "vs MD Simulations" : {
-                    "x" : "calc",
-                    "y" : "mdft_energy_pc mdft_energy_pc+"
+            "plotsvs" : {
+                "plot" : {
+                    "x" : "",
+                    "y" : []
                 }
             },
-            "errordistrib" : {
-                "vs Experimental" : {
-                    "x" : "expt",
-                    "y" : "calc mdft_energy_pc mdft_energy_pc+",
-                    "name" : "error_distribution_exp"
-                },
-                "vs MD Simulations" : {
-                    "x" : "calc",
-                    "y" : "mdft_energy_pc mdft_energy_pc+",
-                    "name" : "error_distribution_calc"
+            "plotserrdistrib" : {
+                "plot" : {
+                    "x" : "",
+                    "y" : [],
+                    "filename" : ""
                 }
             },
-            "errorby" : {
-                "vs Experimental" : {
-                    "x" : "expt",
-                    "y" : "calc mdft_energy_pc",
-                    "cat_column" : "groups"
+            "plotsby" : {
+                "plot" : {
+                    "x" : "",
+                    "y" : [],
+                    "cat_column" : ""
                 }
             },
-            "unit" : "kcal/mol"
+            "unit" : ""
         }
-    },
-    "analogs" : {
-        "format" : "json",
-        "file" : "analog_mdft_db.json"
-    }        
+    }     
 }
