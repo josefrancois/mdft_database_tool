@@ -1,10 +1,11 @@
-# mdft_database_tool
-This project is only compatible with Linux. It has been written in [Python](https://www.python.org/) 2.7 which is required to use the project. \
-It can be easily installed on Linux, if not, by using apt : `sudo apt install python2.7`
-
+# MDFT Database Tool : an efficient wrapper around MDFT code
 ## Background
-## Required Python Libraries
-Some libraries are required and can be easily installed via [pip](https://pip.pypa.io/en/stable/installing/) :
+**Molecular Density Functional Theory (MDFT)** is a solvation model associated to a high-performing code, **MDFT code**, proposed by Daniel Borgis from La Maison De La Simulation and Maximilien Levesque from L'Ecole Normale Supérieure to compute fast and accurate solvation free energies.\
+This work provides an easy-to-use and efficient computational tool enabling to run MDFT code on large databases and providing in-depth comparative analysis to evaluate the performance of MDFT on a large chemical space in a reliable and reproducible way.
+## Requirements
+This project is only compatible with Linux. It has been written in [Python](https://www.python.org/) 2.7 which is required to use the project. \
+It can be easily installed on Linux, if not, by using apt : `sudo apt install python2.7`\
+Some Python libraries are required and can be easily installed via [pip](https://pip.pypa.io/en/stable/installing/) :
 - [numpy](http://www.numpy.org/)
 - [matplotlib](https://matplotlib.org/)
 - [pandas](http://pandas.pydata.org/)
@@ -16,10 +17,11 @@ One command to install all the needed libraries : `sudo pip install numpy matplo
 To install the project directly from GitHub :\
 `git clone https://github.com/josefrancois/mdft_database_tool`
 
-## What the user needs to do ?
-1. To provide a database of molecules : only GROMACS and JSON format are compatible
+## What does the user need to do ?
+1. To provide a database of molecules, in GROMACS or JSON format
 2. To provide reference values of solvation free energy for each molecule of the database, in JSON format (not mandatory but recommended)
 3. Edit database_definition.json (see the next section)
+4. Execute four simple commands
 
 ## Editing database_definition.json
 This parameter file is written in [JSON](https://fr.wikipedia.org/wiki/JavaScript_Object_Notation). 
@@ -51,7 +53,7 @@ All the plots are generated in *png* format.
 For each plot, which can be indicated by any key, a value must be indicated for x and y axis.\
 For x axis, only one value can be attributed to the x axis through the **"x"** key. For y axis, a list of values can be indicated to plot them against the x value through **"y"** key (see the example below)\
 For Error Distribution plots, a further **"filename"** key much be specified to indicate the name of the png file. No need to put the .png extension.\
-For AUE plots, a categorical field from the input database must be indicated througfh a further **"cat_column"** key.
+For AUE plots, a categorical field from the input database must be indicated througfh a further **"cat_column"** key.\
 A final **"unit"** key must be indicated to specify the unit of the involved values. The unit will appear besides the labels in th plots.
 
 Example with [FreeSolv](https://github.com/MobleyLab/FreeSolv) database built by David L. Mobley and al.:
@@ -95,14 +97,22 @@ Example with [FreeSolv](https://github.com/MobleyLab/FreeSolv) database built by
 }
 ```
 ## Four steps - Four commands
-After providing the input database and editing `database_definition.json`, the user needs to go through four simple steps via four commands to get what he wants.
-1) Process : transforming the molecules of the database into files compatible with MDFT code\
-Command : `python mdft_db_process.py -db database`
-2) Running : running MDFT code on every molecules\
-Command : `bash runAll.sh`
-3) Parsing : getting the results from MDFT calculations\
-Command : `python mdft_parse.py -db database`
-4) Analysis : generating the plots and analyzing the results\
-Command : `python mdft_db_analysis.py -db database`
+After providing the input database and editing `database_definition.json`, the user needs to execute four main scripts via four commands to get what he wants.
+1) **Processing** : transforming the molecules of the database into files compatible with MDFT code\
+Command : **`python mdft_db_process.py -database db_key`**\
+The **database** option awaits the key that was chosen by the user to indicate its database in the parameter file `database_definition.json`.\
+Other options are available to parametrize the MDFT calculations or the computer where they will be performed.
+The user can do the calculations on his localhost or on a remote server through the **server** option. All the available servers are showed in the file `serversParam.json` stored into the `references/parameters/` directory.
+The output of this step is a folder whose name will be the key indicating the database and containing one subfolder for each molecule and all the files necessary for the second and third steps.
+Here, only the database option is mandatory. 
+2) **Running** : running MDFT code on every molecules\
+Command : **`bash runAll.sh`**\
+`runAll.sh` is generated on the fly from the first step. Beware : it has different forms according to the computer where the calculations are done. This step can not work if the form of this script and the wanted server are not in accordance.
+3) **Parsing** : getting the results from MDFT calculations\
+Command : **`python mdft_parse.py -database db_key`**\
+If the key for the database is indicated and the file for the reference values is provided and indicated in `database_definition.json` (key : **"ref_values"**), the values from MDFT calculations will be merged with the values of the database into a single JSON file as the output of this step. The name of this file can be managed through the **"mdft_output"** key in `database_definition.json`.
+4) **Analyzing** : generating the plots and analyzing the results\
+Command : **`python mdft_db_analysis.py -database db_key`**\
+Here, the database option is mandatory. This step creates a folder with all the needed plots (in png format) taking into account the parameters indicated in `database_definition.json`.
 
-Enjoy !
+The help of the commands and all their possible options are available using the **`-h`** option.
