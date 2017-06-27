@@ -15,10 +15,11 @@ One command to install all the needed libraries : `sudo pip install numpy matplo
 To install the project directly from GitHub :\
 `git clone https://github.com/josefrancois/mdft_database_tool`
 
-## What the user needs to do ?
+## What does the user need to do ?
 1. To provide a database of molecules, in GROMACS or JSON format
 2. To provide reference values of solvation free energy for each molecule of the database, in JSON format (not mandatory but recommended)
 3. Edit database_definition.json (see the next section)
+4. Execute four simple commands
 
 ## Editing database_definition.json
 This parameter file is written in [JSON](https://fr.wikipedia.org/wiki/JavaScript_Object_Notation). 
