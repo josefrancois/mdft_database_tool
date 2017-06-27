@@ -42,7 +42,7 @@ class MdftPlotter:
         plt.text(limit_min+abs(limit_min-limit_max)*0.23, limit_max-abs(limit_min-limit_max)*0.15, \
         "RMSE = {0:.2f} {9:s}\n P Bias = {1:.2f} %\nPearson R = {2:.2f}\nSpearman {3:s} = {4:.2f}\nKendall {5:s} = {6:.2f}\nR{7:s} = {8:.2f}"\
         .format(rmse, pbias, pearson_r, r'$\rho$', spearman_rho, r'$\tau$', kendall_tau, r'$^2$', r2, unit), ha='center', va='center', bbox={'facecolor':'white', 'alpha':0.5, 'pad':10})       
-        plt.savefig(self.plots_dir+"/" + y_column + "VS" + x_column +".png", format="png", dpi = 200, bbox_inches='tight', edgecolor='black')
+        plt.savefig(self.plots_dir+"/"+"correlation__"+ y_column + "__vs__" + x_column +".png", format="png", dpi = 200, bbox_inches='tight', edgecolor='black')
     
     def calcDiffs(self, ref_column, comp_columns_list, ref_label, comp_labels):
         diff_db = pd.DataFrame()
