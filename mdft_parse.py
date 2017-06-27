@@ -7,7 +7,7 @@ import glob
 import json
 
 arg_parser = argparse.ArgumentParser(prog="mdft_parse.py", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-arg_parser.add_argument("--database","-db", help = "Database to parse", default = None)
+arg_parser.add_argument("--database","-db", help = "Database to parse (indicated key in database_definition.json)", default = None)
 mdft_args = arg_parser.parse_args()
 
 with open('database_definition.json', 'r') as json_file:

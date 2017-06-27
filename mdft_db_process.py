@@ -15,7 +15,7 @@ import argparse
 import sys
 
 arg_parser = argparse.ArgumentParser(prog="mdft_db_process.py", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-arg_parser.add_argument("--database", "-db", help = "Database to parse", default = None)
+arg_parser.add_argument("--database", "-db", help = "Used key in database_definition.json to indicate the database", default = None)
 arg_parser.add_argument("--voxelsize", "-dx", help = "Distance between two nodes [unit : angstroms]", type=float, default = 0.5)
 arg_parser.add_argument("--lenbulk", "-lb", help = "Distance between solute and box sides [unit : angstroms]", type=int, default = 10)
 arg_parser.add_argument("--solvent", help = "Solvent to use in MDFT")

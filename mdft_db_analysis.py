@@ -6,7 +6,7 @@ import argparse
 import sys
 
 arg_parser = argparse.ArgumentParser(prog="mdft_db_analysis.py", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-arg_parser.add_argument("--database", "-db", help = "Database from which plots will be generated", default = None)
+arg_parser.add_argument("--database", "-db", help = "Database from which plots will be generated (indicated key in database_definition.json", default = None)
 mdft_args = arg_parser.parse_args()
 
 if mdft_args.database == None:
