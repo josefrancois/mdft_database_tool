@@ -34,7 +34,7 @@ Then, the available keys to describe the database are listed as followed :
 - **"github"** (optional) : GitHub URL of the input database
 If the database is stored on GitHub and is an archive, indicate the name of the archive
 - **"commit"** (optional) : Commit of the input database if 'github' is indicated
-- **"ref_values"** (optional but recommended) : File containing the reference values of solvation free energy for every molecules of the database
+- **"ref_values"** (optional but recommended) : File containing the reference values of solvation free energies for each molecule of the database\
   Must be provided in JSON.
 - **"mdft_output"** (optional but recommended) : Name of the output JSON file from MDFT results
 - **"values_to_parse"** : Values block to indicate values that have to be parsed from the database of reference values and their associated label 
@@ -102,15 +102,16 @@ After providing the input database and editing `database_definition.json`, the u
 Command : **`python mdft_db_process.py -database DATABASE`**\
 The **database** option awaits the key that was chosen by the user to indicate its database in the parameter file `database_definition.json`.\
 Other options are available to parametrize the MDFT calculations or the computer where they will be performed.
-The user can do the calculations on his localhost or on a remote server through the **server** option. All the available servers are showed in the file `serversParam.json` stored into the `references/parameters/` directory.
-The output of this step is a folder whose name will be the key indicating the database and containing one subfolder for each molecule and all the files necessary for the second and third steps.
+The user can do the calculations on his localhost or on a remote server through the **server** option. All the available servers are showed in the file `serversParam.json` stored into the `references/parameters/` directory.\
+The output of this step is a folder whose name will be the key indicating the database and containing one subfolder for each molecule and all the files necessary for the second and third steps.\
 Here, only the database option is mandatory. 
 2) **Running** : running MDFT code on every molecules\
 Command : **`bash runAll.sh`**\
 `runAll.sh` is generated on the fly from the first step. Beware : it has different forms according to the computer where the calculations are done. This step can not work if the form of this script and the wanted server are not in accordance.
 3) **Parsing** : getting the results from MDFT calculations\
 Command : **`python mdft_parse.py -database DATABASE`**\
-If the key for the database is indicated and the file for the reference values is provided and indicated in `database_definition.json` (key : **"ref_values"**), the values from MDFT calculations will be merged with the values of the database into a single JSON file as the output of this step. The name of this file can be managed through the **"mdft_output"** key in `database_definition.json`.
+If the key for the database is indicated and the file for the reference values is provided and indicated in `database_definition.json` (key : **"ref_values"**), the values from MDFT calculations will be merged with the values of the database into a single JSON file as the output of this step.\
+The name of this file can be managed through the **"mdft_output"** key in `database_definition.json`.
 4) **Analyzing** : generating the plots and analyzing the results\
 Command : **`python mdft_db_analysis.py -database DATABASE`**\
 Here, the database option is mandatory. This step creates a folder with all the needed plots (in png format) taking into account the parameters indicated in `database_definition.json`.
