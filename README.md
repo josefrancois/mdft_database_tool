@@ -36,7 +36,7 @@ If the database is stored on GitHub and is an archive, indicate the name of the 
 - **"commit"** (optional) : Commit of the input database if 'github' is indicated
 - **"ref_values"** (optional but recommended) : File containing the reference values of solvation free energy for every molecules of the database
   Must be provided in JSON.
-- **"mdft_output"** (optional but recommended) : Name of the output JSON file from MDFT calculations
+- **"mdft_output"** (optional but recommended) : Name of the output JSON file from MDFT results
 - **"values_to_parse"** : Values block to indicate values that have to be parsed from the database of reference values and their associated label 
 - **"plots"** : Plots block to accurately parametrize the plots
 
@@ -99,7 +99,7 @@ Example with [FreeSolv](https://github.com/MobleyLab/FreeSolv) database built by
 ## Four steps - Four commands
 After providing the input database and editing `database_definition.json`, the user needs to execute four main scripts via four commands to get what he wants.
 1) **Processing** : transforming the molecules of the database into files compatible with MDFT code\
-Command : **`python mdft_db_process.py -database db_key`**\
+Command : **`python mdft_db_process.py -database DATABASE`**\
 The **database** option awaits the key that was chosen by the user to indicate its database in the parameter file `database_definition.json`.\
 Other options are available to parametrize the MDFT calculations or the computer where they will be performed.
 The user can do the calculations on his localhost or on a remote server through the **server** option. All the available servers are showed in the file `serversParam.json` stored into the `references/parameters/` directory.
@@ -109,10 +109,10 @@ Here, only the database option is mandatory.
 Command : **`bash runAll.sh`**\
 `runAll.sh` is generated on the fly from the first step. Beware : it has different forms according to the computer where the calculations are done. This step can not work if the form of this script and the wanted server are not in accordance.
 3) **Parsing** : getting the results from MDFT calculations\
-Command : **`python mdft_parse.py -database db_key`**\
+Command : **`python mdft_parse.py -database DATABASE`**\
 If the key for the database is indicated and the file for the reference values is provided and indicated in `database_definition.json` (key : **"ref_values"**), the values from MDFT calculations will be merged with the values of the database into a single JSON file as the output of this step. The name of this file can be managed through the **"mdft_output"** key in `database_definition.json`.
 4) **Analyzing** : generating the plots and analyzing the results\
-Command : **`python mdft_db_analysis.py -database db_key`**\
+Command : **`python mdft_db_analysis.py -database DATABASE`**\
 Here, the database option is mandatory. This step creates a folder with all the needed plots (in png format) taking into account the parameters indicated in `database_definition.json`.
 
 The help of the commands and all their possible options are available using the **`-h`** option.
