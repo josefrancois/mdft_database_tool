@@ -3,19 +3,21 @@ import os
 import mdft_analysis.mdftPlotter as mP
 import json
 import argparse
+import sys
 
 arg_parser = argparse.ArgumentParser(prog="mdft_db_analysis.py", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-#arg_parser.add_argument("--json", help = "JSON file to parse", default = "mdft.json")
-arg_parser.add_argument("--mdft_database", "-mdft_db", help = "Database for which MDFT will be compared", default = "mobley")
+arg_parser.add_argument("--database", "-db", help = "Database from which plots will be generated", default = None)
 mdft_args = arg_parser.parse_args()
 
+if mdft_args.database == None:
+    sys.exit("Please indicate an input database !")
 
 with open("database_definition.json", 'r') as json_file:
     db_def = json.load(json_file)
-    db_values = db_def[mdft_args.mdft_database]['values_to_parse']
-    mdft_json = db_def[mdft_args.mdft_database]["mdft_output"]
+    db_values = db_def[mdft_args.database]['values_to_parse']
+    mdft_json = db_def[mdft_args.database]["mdft_output"]
     mdft_db = pd.read_json(mdft_json, orient='index')
-    plots = db_def[mdft_args.mdft_database]['plots']  
+    plots = db_def[mdft_args.database]['plots']  
     unit = plots['unit']
     
 #mdft_db = pd.read_json(mdft_args.json, orient='index')

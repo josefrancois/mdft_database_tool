@@ -12,7 +12,7 @@ import mdft_writer.runAllWriter as rAW
 import dbCloner as dbC
 import json
 import argparse
-
+import sys
 
 arg_parser = argparse.ArgumentParser(prog="mdft_db_process.py", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 arg_parser.add_argument("--database", "-db", help = "Database to parse", default = None)
@@ -29,6 +29,8 @@ arg_parser.add_argument("--solute_charges_scale_factor", "-scsf", help = "Solute
 arg_parser.add_argument("--direct_solute_sigmak", "-dss", help = "Guillaume Jeanmairet's implementation", default = 'F')
 mdft_args = arg_parser.parse_args()
 
+if mdft_args.database == None:
+    sys.exit("Please indicate an input database !")
 
 if mdft_args.bridge == 'none' :
     input_mdft = mdft_args.database+'/'
@@ -54,6 +56,8 @@ input_db_name = None
 if db_format == 'gromacs':
     if "github" in input_name:
         cloner = dbC.DBCloner(input_name["github"], input_name["mol_db"])
+        if "commit" in input_name:
+            cloner.setCommitHash(input_name["commit"])
         input_db_name = cloner.write()
         cloner.execute()
     else:
