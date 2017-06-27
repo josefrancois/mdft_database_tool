@@ -115,4 +115,4 @@ If the key for the database is indicated and the file for the reference values i
 Command : **`python mdft_db_analysis.py -database db_key`**\
 Here, the database option is mandatory. This step creates a folder with all the needed plots (in png format) taking into account the parameters indicated in `database_definition.json`.
 
-The help of the commands and all their possible options are available using the **`-h`** option 
+The help of the commands and all their possible options are available using the **`-h`** option.
