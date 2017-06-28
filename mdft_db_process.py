@@ -1,9 +1,3 @@
-"""
-Project : MDFT Database Tool
-
-Author : Jose Francois
-"""
-
 import os
 import mdft_parser.gromacsParser as gP
 import mdft_parser.jsondbParser as jdP
@@ -14,6 +8,8 @@ import json
 import argparse
 import sys
 
+
+# Options to get the name of the database and parametrize MDFT calculations
 arg_parser = argparse.ArgumentParser(prog="mdft_db_process.py", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 arg_parser.add_argument("--database", "-db", help = "Used key in database_definition.json to indicate the database", default = None)
 arg_parser.add_argument("--voxelsize", "-dx", help = "Distance between two nodes [unit : angstroms]", type=float, default = 0.5)
@@ -29,6 +25,8 @@ arg_parser.add_argument("--solute_charges_scale_factor", "-scsf", help = "Solute
 arg_parser.add_argument("--direct_solute_sigmak", "-dss", help = "Guillaume Jeanmairet's implementation", default = 'F')
 mdft_args = arg_parser.parse_args()
 
+
+# If used, add bridge name to the database name 
 if mdft_args.database == None:
     sys.exit("Please indicate an input database !")
 
@@ -36,17 +34,21 @@ if mdft_args.bridge == 'none' :
     input_mdft = mdft_args.database+'/'
 else:
     input_mdft = mdft_args.database+ "_"+ mdft_args.bridge +'/'
+    
 
+# Creation of a directory whose name is database's
 if os.path.exists(input_mdft) == False:
     os.mkdir(input_mdft)
     
-
+    
+# Retrieving of all values of the command options
 param_mdft = {'lb':mdft_args.lenbulk, 'dx':mdft_args.voxelsize, 'solvent':mdft_args.solvent, \
               'mmax':mdft_args.mmax, 'temperature':mdft_args.temperature, 'bridge':mdft_args.bridge, \
               'solute_charges_scale_factor':mdft_args.solute_charges_scale_factor,\
               'direct_solute_sigmak': mdft_args.direct_solute_sigmak}
               
 
+# Retrieveing informations from database_definition.json about the database and choice of the adequate parser
 with open('database_definition.json', 'r') as json_file:
     db_def = json.load(json_file)
 input_name = db_def[mdft_args.database]
@@ -69,7 +71,8 @@ elif db_format == 'json':
         input_db = json.load(fjson)
     parser = jdP.JsonDBParser(input_db)
     
-    
+
+# Creation of one subfolder for each molecule of the database with its dft.in, solute.in and .do file, and writing of runAll.sh into the created folder (input_mdft)   
 run_writer = rAW.runAllWriter()
 
 for mol in input_db:
@@ -82,14 +85,20 @@ for mol in input_db:
     os.system("cp ./references/do_files/" + run_writer.getDoFile(mdft_args.server)+ " " + input_mdft+molecule.getName())
 
 run_writer.write(mdft_args.server, mdft_args.mdftcommit, input_mdft)    
-  
 
+  
+# Copying of all the necessary files into the created folder
 os.system("cp mdft_parse.py " + input_mdft)
 os.system("cp database_definition.json " + input_mdft)
 os.system("cp -r mdft_parser "  + input_mdft)
 os.system("cp -r mdft_writer "  + input_mdft)
 os.system("cp -r references " + input_mdft)
 
+
+# If MDFTPATH option was used, transferring of MDFT code from the submitted path to the output folder
 if mdft_args.mdftpath is not None :
     os.system("cp -r " + mdft_args.mdftpath + " " + input_mdft)
+    
+    
+# Creation of an archive    
 os.system("tar -czvf " + input_mdft[:-1] + ".tar.gz " +input_mdft)
