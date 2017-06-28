@@ -1,0 +1,123 @@
+{
+    "freesolv" : {                          
+        "mol_db" : "gromacs_solvated.tar.gz", 
+        "format" : "gromacs",
+        "github" : "https://github.com/MobleyLab/FreeSolv",
+        "ref_values" : "database.json",
+        "mdft_output": "mdft_mmax1_ref.json",
+        "values_to_parse" : {
+            "calc" : {
+                "label" : "MD Simulations"
+            },
+            "expt" : {
+                "label" : "Experimental"
+            }
+        },
+        "plots" : {
+            "plotsvs" : {
+                "vs Experimental" : {
+                    "x" : "expt",
+                    "y" : ["calc","mdft_energy_pc", "mdft_energy_pc+"]
+                },
+                "vs MD Simulations" : {
+                    "x" : "calc",
+                    "y" : ["mdft_energy_pc", "mdft_energy_pc+"]
+                }
+            },
+            "plotserrdistrib" : {
+                "vs Experimental" : {
+                    "x" : "expt",
+                    "y" : ["calc","mdft_energy_pc", "mdft_energy_pc+"],
+                    "filename" : "error_distribution_exp"
+                },
+                "vs MD Simulations" : {
+                    "x" : "calc",
+                    "y" : ["mdft_energy_pc", "mdft_energy_pc+"],
+                    "filename" : "error_distribution_calc"
+                }
+            },
+            "plotsby" : {
+                "vs Experimental" : {
+                    "x" : "expt",
+                    "y" : ["calc","mdft_energy_pc"],
+                    "cat_column" : "groups"
+                }
+            },
+            "unit" : "kcal/mol"
+        }
+    },
+    "ions" : {
+        "format" : "json",
+        "mol_db" : "ions.json",
+        "ref_values" : "ions_values.json",
+        "mdft_output" : "mdft_results_ions.json",
+        "values_to_parse" : {
+            "calc" : {
+                "label" : "MD Simulations"
+                },
+            "expt" : {
+                "label" : "Experimental"
+            }
+        },
+        "plots" : {
+            "plotsvs" : {
+                "vs Experimental" : {
+                    "x" : "expt",
+                    "y" : ["calc","mdft_energy_pc", "mdft_energy_pc+"]
+                },
+                "vs MD" : {
+                    "x" : "calc",
+                    "y" : ["mdft_energy_pc", "mdft_energy_pc+"]
+                }
+            },
+            "plotserrdistrib" : {
+                "vs Experimental" : {
+                    "x" : "expt",
+                    "y" : ["calc","mdft_energy_pc", "mdft_energy_pc+"],
+                    "filename" : "error_distribution_ions_expt"
+                }
+            },
+            "unit" : "kcal/mol"
+        }
+    },
+    "analog" : {
+        "format" : "json",
+        "mol_db" : "analog.json",
+        "mdft_output" : "mdft_results_analog.json"
+    },
+    "test" : {
+        "mol_db" : "minitopgro",
+        "format" : "gromacs",
+        "ref_values" : "mobley.json",
+        "mdft_output" : "mdft_results_test.json",
+        "values_to_parse" : {
+            "calc" : {
+                "label" : "MD Simulations"
+                },
+            "expt" : {
+                "label" : "Experimental"
+            }
+        },
+        "plots" : {
+            "plotsvs" : {
+                "vs Experimental" : {
+                    "x" : "expt",
+                    "y" : ["calc","mdft_energy_pc", "mdft_energy_pc+"]
+                },
+                "vs MD" : {
+                    "x" : "calc",
+                    "y" : ["mdft_energy_pc", "mdft_energy_pc+"]
+                }
+            },
+            "plotserrdistrib" : {
+                "vs Experimental" : {
+                    "x" : "expt",
+                    "y" : ["calc","mdft_energy_pc", "mdft_energy_pc+"],
+                    "filename" : "error_distribution_exp"
+                }
+            },
+            "unit" : "kcal/mol"
+        }
+    }
+             
+}
