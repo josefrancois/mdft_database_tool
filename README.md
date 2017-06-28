@@ -5,7 +5,7 @@ This work provides an easy-to-use and efficient computational tool enabling to r
 ## Requirements
 This project is only compatible with Linux. It has been written in [Python](https://www.python.org/) 2.7 which is required to use the project. \
 It can be easily installed on Linux, if not, by using apt : `sudo apt install python2.7`\
-Some Python libraries are required and can be easily installed via [pip](https://pip.pypa.io/en/stable/installing/) :
+After installing Python, some Python libraries are required and can be easily installed via [pip](https://pip.pypa.io/en/stable/installing/) :
 - [numpy](http://www.numpy.org/)
 - [matplotlib](https://matplotlib.org/)
 - [pandas](http://pandas.pydata.org/)
@@ -99,7 +99,7 @@ Example with [FreeSolv](https://github.com/MobleyLab/FreeSolv) database built by
 ## Four steps - Four commands
 After providing the input database and editing `database_definition.json`, the user needs to execute four main scripts via four commands to get what he wants.
 1) **Processing** : transforming the molecules of the database into files compatible with MDFT code\
-Command : **`python mdft_db_process.py -database DATABASE`**\
+Command : **`python mdft_db_process.py --database DATABASE`**\
 The **database** option awaits the key that was chosen by the user to indicate its database in the parameter file `database_definition.json`.\
 Other options are available to parametrize the MDFT calculations or the computer where they will be performed.
 The user can do the calculations on his localhost or on a remote server through the **server** option. All the available servers are showed in the file `serversParam.json` stored into the `references/parameters/` directory.\
@@ -109,11 +109,11 @@ Here, only the database option is mandatory.
 Command : **`bash runAll.sh`**\
 `runAll.sh` is generated on the fly from the first step. Beware : it has different forms according to the computer where the calculations are done. This step can not work if the form of this script and the wanted server are not in accordance.
 3) **Parsing** : getting the results from MDFT calculations\
-Command : **`python mdft_parse.py -database DATABASE`**\
+Command : **`python mdft_parse.py --database DATABASE`**\
 If the key for the database is indicated and the file for the reference values is provided and indicated in `database_definition.json` (key : **"ref_values"**), the values from MDFT calculations will be merged with the values of the database into a single JSON file as the output of this step.\
 The name of this file can be managed through the **"mdft_output"** key in `database_definition.json`.
 4) **Analyzing** : generating the plots and analyzing the results\
-Command : **`python mdft_db_analysis.py -database DATABASE`**\
+Command : **`python mdft_db_analysis.py --database DATABASE`**\
 Here, the database option is mandatory. This step creates a folder with all the needed plots (in png format) taking into account the parameters indicated in `database_definition.json`.
 
 The help of the commands and all their possible options are available using the **`-h`** option.
