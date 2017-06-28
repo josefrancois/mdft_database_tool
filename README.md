@@ -3,7 +3,7 @@
 **Molecular Density Functional Theory (MDFT)** is a solvation model associated to a high-performing code, **MDFT code**, proposed by Daniel Borgis from La Maison De La Simulation and Maximilien Levesque from L'Ecole Normale Supérieure to compute fast and accurate solvation free energies.\
 This work provides an easy-to-use and efficient computational tool enabling to run MDFT code on large databases and providing in-depth comparative analysis to evaluate the performance of MDFT on a large chemical space in a reliable and reproducible way.
 ## Requirements
-This project is only compatible with Linux. It has been written in [Python](https://www.python.org/) 2.7 which is required to use the project. \
+This project is only tested on Linux. It has been written in [Python](https://www.python.org/) 2.7 which is required to use the project. \
 It can be easily installed on Linux, if not, by using apt : `sudo apt install python2.7`\
 After installing Python, some Python libraries are required and can be easily installed via [pip](https://pip.pypa.io/en/stable/installing/) :
 - [numpy](http://www.numpy.org/)
@@ -11,7 +11,13 @@ After installing Python, some Python libraries are required and can be easily in
 - [pandas](http://pandas.pydata.org/)
 - [seaborn](https://seaborn.pydata.org/)
 
-One command to install all the needed libraries : `sudo pip install numpy matplotlib pandas seaborn`
+One command to install all the needed libraries : `sudo pip install numpy matplotlib pandas seaborn`  
+or, if you prefere conda:  
+```bash
+conda install numpy matplotlib pandas seaborn
+```
+
+
 
 ## Installation procedure
 To install the project directly from GitHub :\
