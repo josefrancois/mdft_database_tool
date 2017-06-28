@@ -3,20 +3,30 @@
 **Molecular Density Functional Theory (MDFT)** is a solvation model associated to a high-performing code, **MDFT code**, proposed by Daniel Borgis from La Maison De La Simulation and Maximilien Levesque from L'Ecole Normale Supérieure to compute fast and accurate solvation free energies.\
 This work provides an easy-to-use and efficient computational tool enabling to run MDFT code on large databases and providing in-depth comparative analysis to evaluate the performance of MDFT on a large chemical space in a reliable and reproducible way.
 ## Requirements
-This project is only tested on Linux. It has been written in [Python](https://www.python.org/) 2.7 which is required to use the project. \
-It can be easily installed on Linux, if not, by using apt : `sudo apt install python2.7`\
-After installing Python, some Python libraries are required and can be easily installed via [pip](https://pip.pypa.io/en/stable/installing/) :
+This project has only been tested on Linux. It has been written in [Python](https://www.python.org/) 2.7 which is required to use the project. \
+It can be easily installed on Linux, if not, by using apt : 
+```bash
+sudo apt install python2.7
+```
+After installing Python, some Python libraries are required :
 - [numpy](http://www.numpy.org/)
 - [matplotlib](https://matplotlib.org/)
 - [pandas](http://pandas.pydata.org/)
 - [seaborn](https://seaborn.pydata.org/)
 
-One command to install all the needed libraries : `sudo pip install numpy matplotlib pandas seaborn`  
-or, if you prefere conda:  
+They can be installed via :
+- apt :
+```bash
+sudo apt install python-numpy python-matplotlib python-pandas python-seaborn
+```
+- [conda](https://conda.io/docs/download.html) :  
 ```bash
 conda install numpy matplotlib pandas seaborn
 ```
-
+- [pip](https://pip.pypa.io/en/stable/installing/)  : 
+```bash
+sudo pip install numpy matplotlib pandas seaborn
+```  
 
 
 ## Installation procedure
@@ -72,6 +82,9 @@ Example with [FreeSolv](https://github.com/MobleyLab/FreeSolv) database built by
         "ref_values" : "database.json",
         "mdft_output": "mdft_results.json",
         "values_to_parse" : {
+            "calc" : {
+                "label" : "MD Simulations"
+            },
             "expt" : {
                 "label" : "Experimental"
             }
@@ -81,6 +94,10 @@ Example with [FreeSolv](https://github.com/MobleyLab/FreeSolv) database built by
                 "vs Experimental" : {
                     "x" : "expt",
                     "y" : ["calc","mdft_energy_pc", "mdft_energy_pc+"]
+                },
+                "vs MD Simulations" : {
+                    "x" : "calc",
+                    "y" : ["mdft_energy_pc", "mdft_energy_pc+"]
                 }
             },
             "plotserrdistrib" : {
@@ -88,6 +105,11 @@ Example with [FreeSolv](https://github.com/MobleyLab/FreeSolv) database built by
                     "x" : "expt",
                     "y" : ["calc","mdft_energy_pc", "mdft_energy_pc+"],
                     "filename" : "error_distribution_exp"
+                },
+                "vs MD Simulations" : {
+                    "x" : "calc",
+                    "y" : ["mdft_energy_pc", "mdft_energy_pc+"],
+                    "filename" : "error_distribution_calc"
                 }
             },
             "plotsby" : {
@@ -99,7 +121,7 @@ Example with [FreeSolv](https://github.com/MobleyLab/FreeSolv) database built by
             },
             "unit" : "kcal/mol"
         }
-    }     
+    }
 }
 ```
 ## Four steps - Four commands
@@ -107,7 +129,7 @@ After providing the input database and editing `database_definition.json`, the u
 1) **Processing** : transforming the molecules of the database into files compatible with MDFT code\
 Command : **`python mdft_db_process.py --database DATABASE`**\
 The **database** option awaits the key that was chosen by the user to indicate its database in the parameter file `database_definition.json`.\
-Other options are available to parametrize the MDFT calculations or the computer where they will be performed.
+Other options are available to parametrize the MDFT calculations or the computer where they will be performed.\
 The user can do the calculations on his localhost or on a remote server through the **server** option. All the available servers are showed in the file `serversParam.json` stored into the `references/parameters/` directory.\
 The output of this step is a folder whose name will be the key indicating the database and containing one subfolder for each molecule and all the files necessary for the second and third steps.\
 Here, only the database option is mandatory. 
