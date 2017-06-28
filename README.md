@@ -19,7 +19,7 @@ They can be installed via :
 ```bash
 sudo apt install python-numpy python-matplotlib python-pandas python-seaborn
 ```
-- conda :  
+- [conda](https://conda.io/docs/download.html) :  
 ```bash
 conda install numpy matplotlib pandas seaborn
 ```
