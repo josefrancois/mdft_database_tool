@@ -1,31 +1,31 @@
 {
-    "database" : {                          
+    "_database" : {                          
         "mol_db" : "", 
         "format" : "",
         "github" : "",
         "ref_values" : "",
         "mdft_output": "",
         "values_to_parse" : {
-            "value" : {
+            "_value" : {
                 "label" : ""
             }
         },
         "plots" : {
             "plotsvs" : {
-                "plot" : {
+                "_plot" : {
                     "x" : "",
                     "y" : []
                 }
             },
             "plotserrdistrib" : {
-                "plot" : {
+                "_plot" : {
                     "x" : "",
                     "y" : [],
                     "filename" : ""
                 }
             },
             "plotsby" : {
-                "plot" : {
+                "_plot" : {
                     "x" : "",
                     "y" : [],
                     "cat_column" : ""
