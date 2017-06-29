@@ -18,11 +18,14 @@ class DftInWriter:
             dftin.write("boxnod = {0} {1} {2}".format(self.n['x'],self.n['y'],self.n['z']) + '\n')
             dftin.write("boxlen = {0} {1} {2}".format(float(self.l['x']),float(self.l['y']),float(self.l['z'])) + '\n')
             dftin.write("mmax = " + str(self.mmax) + "\n")
-            dftin.write("temperature = " + str(self.temperature) + "\n")  
-            dftin.write("bridge = " + str(self.bridge) + "\n")
-            dftin.write("solute_charges_scale_factor = " + str(self.scsf) + "\n")
-            dftin.write("direct_solute_sigmak = " + str(self.dss) + "\n")                        
-            if (self.solvent is not None) :
+            dftin.write("temperature = " + str(self.temperature) + "\n")
+            if self.bridge != "none":  
+                dftin.write("bridge = " + str(self.bridge) + "\n")
+            if self.scsf != None:
+                dftin.write("solute_charges_scale_factor = " + str(self.scsf) + "\n")
+            if self.dss != None:
+                dftin.write("direct_solute_sigmak = " + str(self.dss) + "\n")                        
+            if self.solvent is not None :
                 dftin.write("solvent = " + str(self.solvent) + "\n")                          
 
     def setMmax(self, mmax):
