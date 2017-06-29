@@ -125,7 +125,7 @@ Example with [FreeSolv](https://github.com/MobleyLab/FreeSolv) database built by
 }
 ```
 
-A template of` database_definition.json` is available into the project. In this template, some keys are prepended by "\*\*". These keys can moduled by the user as he wants. But the other ones must be written as it is.
+A template of` database_definition.json` is available into the project. In this template, some keys are prepended by "\*\*". These keys can be moduled by the user as he wants. But the other ones must be written as it is.
 
 ## Four steps - Four commands
 After providing the input database and editing `database_definition.json`, the user needs to execute four main scripts via four commands to get what he wants.
