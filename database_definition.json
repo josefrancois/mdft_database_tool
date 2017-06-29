@@ -4,7 +4,7 @@
         "format" : "gromacs",
         "github" : "https://github.com/MobleyLab/FreeSolv",
         "ref_values" : "database.json",
-        "mdft_output": "mdft_mmax1_ref.json",
+        "mdft_output": "mdft_results_freesolv.json",
         "values_to_parse" : {
             "calc" : {
                 "label" : "MD Simulations"
