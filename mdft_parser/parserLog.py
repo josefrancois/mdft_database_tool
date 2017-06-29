@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*- 
-
 import json
 import converter as cv
 import math as m
@@ -16,9 +14,9 @@ class ParserLog:
 	with open(logfile, 'r') as flog :
             for line in flog:
                 for mdft_value in self.mdft_values:
-                    #To avoid all 'NaN' results and to avoid any decoding error from 'mdftParsedValues.json' file reading	
+                    #To avoid any decoding error from 'mdftParsedValues.json' file reading AND avoid all 'NaN' results
                     if self.mdft_values[mdft_value]['flag'].encode('ascii', 'ignore') in line and m.isnan(float(line.split()[self.mdft_values[mdft_value]['position']]))==False:         
-		                ### All quantities in kcal/mol
+		                # All quantities in kcal/mol
                         data_log[mdft_value] = converter.kjTokcal(float(line.split()[self.mdft_values[mdft_value]['position']]))
 			
         	

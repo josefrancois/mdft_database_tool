@@ -21,8 +21,8 @@ arg_parser.add_argument("--server", "-sv", help = "Server machine in which MDFT 
 arg_parser.add_argument("--mdftcommit", help = "Commit hash of mdft-dev that should be used", default = None)
 arg_parser.add_argument("--mdftpath", help = "Path of mdft-dev if already compiled", default = None)
 arg_parser.add_argument("--bridge", "-bg", help = "Bridge Functional to use in MDFT calculations", default = "none")
-arg_parser.add_argument("--solute_charges_scale_factor", "-scsf", help = "Solute charges factor which indicates how much we consider the influence of the partial charges", default = 1)
-arg_parser.add_argument("--direct_solute_sigmak", "-dss", help = "Guillaume Jeanmairet's implementation", default = 'F')
+arg_parser.add_argument("--solute_charges_scale_factor", "-scsf", help = "Solute charges factor which indicates how much we consider the influence of the partial charges", default = None)
+arg_parser.add_argument("--direct_solute_sigmak", "-dss", help = "Guillaume Jeanmairet's implementation", default = None)
 mdft_args = arg_parser.parse_args()
 
 
@@ -67,7 +67,7 @@ if db_format == 'gromacs':
     else:
         input_db_name = input_name["mol_db"]
     if "ref_values" in input_name:
-        os.system("cp " + input_name["ref_values"] + " " + input_mdft)   
+        os.system("cp " + input_name["ref_values"] + " " + input_mdft) #Copy the database of reference values if provided in input_mdft  
     parser = gP.GromacsParser(input_db_name)    
     input_db = [f[:-4] for f in os.listdir(input_db_name) if ".gro" in f]
 elif db_format == 'json':

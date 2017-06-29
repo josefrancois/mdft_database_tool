@@ -1,7 +1,7 @@
 import json
 
 class runAllWriter:
-    "Definition of a runAll.sh writer in order to launch MDFT with the right .do files"       
+    "Definition of a runAll.sh writer in order to launch MDFT with the correct .do files"       
     def __init__(self):
         with open("./references/parameters/serversParam.json", 'r') as json_param:
             self.serv_param = json.load(json_param)

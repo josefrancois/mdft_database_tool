@@ -3,7 +3,7 @@ from molecule import *
 import json
 
 class JsonDBParser:
-    "This class defines a parser for our MDFT database in JSON format"
+    "This class defines a parser for a database in JSON format"
 
     def __init__(self, mdft_db=None):
         self.mdft_db = mdft_db

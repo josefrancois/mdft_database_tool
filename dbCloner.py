@@ -8,7 +8,7 @@ class DBCloner:
         self.ref_file = None
         
     def write(self):
-        with open('cloneDB.sh', 'w') as clone_file:
+        with open('cloneDB.sh', 'w') as clone_file: # Generation of a bash script to clone the database and copy the wanted files in the current directory
             clone_file.write("git clone " + self.github_url + '\n')
             if self.commit_hash != None:
                 clone_file.write("git checkout " + self.commit_hash + '\n')

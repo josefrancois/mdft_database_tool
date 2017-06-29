@@ -6,7 +6,7 @@ from parserJson import *
 
 
 class GromacsParser:
-    "This class manages which .gro and .top files to parse and submit them to .gro (parserGro) and .top (parserTop) parsers"
+    "This class manages the data retrieved from the parsing of .gro and .top files by parserTop and parserGro modules"
     def __init__(self, mdft_db = None):
         self.mdft_db = mdft_db
 

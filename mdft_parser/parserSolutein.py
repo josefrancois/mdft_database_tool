@@ -19,8 +19,8 @@ class SoluteinParser:
         with open(solutein, 'r') as sltin:
             for ind, line in enumerate(sltin):
                 if ind == 0:
-                    self.name = line.split()[0]
-                if ind >= 3:
+                    self.name = line.split()[0] # Name of the molecule
+                if ind >= 3: # Parsing of informations about the atoms composing the molecule
                      self.list_num.append(line.split()[0])
                      self.list_charge.append(float(line.split()[1]))
                      self.list_sigma.append(float(line.split()[2]))

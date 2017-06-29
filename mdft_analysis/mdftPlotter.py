@@ -10,6 +10,7 @@ plt.rcParams['figure.figsize'] = (7.0, 7.0)
 plt.rcParams['axes.labelsize'] = 20
 
 class MdftPlotter:
+    "This class defines an ensemble of functions to generate various plots useful to the analysis of MDFT results"
     def __init__(self, db = None, plots_dir = None):
         self.database = db
         self.plots_dir = plots_dir
