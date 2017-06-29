@@ -124,6 +124,9 @@ Example with [FreeSolv](https://github.com/MobleyLab/FreeSolv) database built by
     }
 }
 ```
+
+A template of` database_definition.json` is available into the project. In this template, some keys are prepended by "\*\*". These keys can moduled by the user as he wants. But the other ones must be written as it is.
+
 ## Four steps - Four commands
 After providing the input database and editing `database_definition.json`, the user needs to execute four main scripts via four commands to get what he wants.
 1) **Processing** : transforming the molecules of the database into files compatible with MDFT code\
@@ -145,3 +148,7 @@ Command : **`python mdft_db_analysis.py --database DATABASE`**\
 Here, the database option is mandatory. This step creates a folder with all the needed plots (in png format) taking into account the parameters indicated in `database_definition.json`.
 
 The help of the commands and all their possible options are available using the **`-h`** option.
+
+## solutein_to_json.py
+This script enables formatting data from a solute.in file into JSON format. These data can be added to a database in JSON format.\
+It also can be used on several solute.in files. To do so, the user just needs to put every solute.in files which has to be transformed into a folder and then use the indicated command at the end of solutein_to_json.py showed as a commentary.
