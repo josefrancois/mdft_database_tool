@@ -47,7 +47,7 @@ Then, the available keys to describe the database are listed as followed :
   If the format is JSON, indicate the JSON file.\
   If it is GROMACS, indicate the name of the directory containing all the .gro and .top files.
 - **"format"** (mandatory) : Format of the database ('gromacs' or 'json')
-- **"github"** (optional) : GitHub URL of the input database
+- **"github"** (optional) : GitHub URL of the input database\
 If the database is stored on GitHub and is an archive, indicate the name of the archive
 - **"commit"** (optional) : Commit of the input database if 'github' is indicated
 - **"ref_values"** (optional but recommended) : File containing the reference values of solvation free energies for each molecule of the database\
