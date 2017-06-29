@@ -150,5 +150,5 @@ Here, the database option is mandatory. This step creates a folder with all the 
 The help of the commands and all their possible options are available using the **`-h`** option.
 
 ## solutein_to_json.py
-As a complement, `solutein_to_json.py` has been added into the project to enable formatting data from a solute.in file, which is the input format to describe a molecule for MDFT code, into JSON format. These data can be added to a database in JSON format.\
+As a complement, `solutein_to_json.py` has been added into the project to enable formatting data from a solute.in file, which is the input format to describe a molecule for MDFT code, into JSON format. These data can be added to any database in JSON format.\
 It also can be used on several solute.in files. To do so, the user just needs to put every solute.in files which has to be transformed into a folder and then use the indicated command at the end of `solutein_to_json.py` showed as a commentary.
