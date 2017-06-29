@@ -60,12 +60,16 @@ if db_format == 'gromacs':
         cloner = dbC.DBCloner(input_name["github"], input_name["mol_db"])
         if "commit" in input_name:
             cloner.setCommitHash(input_name["commit"])
+        if "ref_values" in input_name :
+            cloner.setRefFile(input_name["ref_values"])
         input_db_name = cloner.write()
         cloner.execute()
     else:
-        input_db_name = input_name["mol_db"]   
+        input_db_name = input_name["mol_db"]
+    if "ref_values" in input_name:
+        os.system("cp " + input_name["ref_values"] + " " + input_mdft)   
     parser = gP.GromacsParser(input_db_name)    
-    input_db = list(set([f[:-4] for f in os.listdir(input_db_name) if ".gro" in f]))
+    input_db = [f[:-4] for f in os.listdir(input_db_name) if ".gro" in f]
 elif db_format == 'json':
     with open(input_name["mol_db"], 'r') as fjson:
         input_db = json.load(fjson)
