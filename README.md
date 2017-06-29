@@ -40,7 +40,7 @@ To install the project directly from GitHub :\
 4. Execute four simple commands
 
 ## Editing database_definition.json
-This parameter file is written in [JSON](https://fr.wikipedia.org/wiki/JavaScript_Object_Notation). 
+This parameter file is written in [JSON](https://en.wikipedia.org/wiki/JSON). 
 In the file, one database is described by a dictionnary containing several keys to describe it. Some are mandatory, some are optional. The user can choose any key to indicate its database, for instance `"freesolv"` in the example below.\
 Then, the available keys to describe the database are listed as followed :
 - **"mol_db"** (mandatory) : Database of molecules\
